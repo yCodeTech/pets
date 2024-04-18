@@ -1,0 +1,37 @@
+@mixin d-flex {
+	display: flex;
+}
+@mixin justify-content-center {
+	@include d-flex;
+	justify-content: center;
+}
+@mixin align-items-center {
+	@include d-flex;
+	align-items: center;
+}
+@mixin center {
+	@include d-flex;
+	@include justify-content-center;
+	@include align-items-center;
+}
+@mixin justify-content-around {
+	@include d-flex;
+	justify-content: space-around;
+}
+@mixin justify-content-between {
+	@include d-flex;
+	justify-content: space-between;
+}
+@mixin vertical-align-space-between {
+	align-content: space-between;
+}
+@mixin round {
+	border-radius: 100px;
+}
+@mixin border($side, $width, $colour) {
+	@if ($side == "all") {
+		border: solid $width $colour;
+	} @else {
+		border-#{$side}: solid $width $colour;
+	}
+}

@@ -1,0 +1,380 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+#settings .row-flex-column .delete-account .btn, .bottom-bar__btn div, #pet_form .toggle-container .input-title, *, .btn, .section-title {
+  font-family: "Lato", sans-serif;
+}
+
+* {
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-size: 12px;
+  color: #101010;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+
+.btn {
+  background: #d9d9d9;
+  display: flex;
+  display: flex;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border-radius: 100px;
+  font-weight: 300;
+  font-style: normal;
+  padding: 10px 45px;
+  font-size: 24px;
+  width: 150px;
+  line-height: 1;
+}
+.btn--large {
+  width: 200px;
+  padding: 18px 70px;
+  font-size: 32px;
+}
+.btn--secondary {
+  background: #7d7d7d;
+  color: #fff;
+}
+.btn--danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.go-back {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.row-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.alert {
+  font-size: 1rem;
+}
+
+.fixed-bars-offset {
+  margin: 56px 0;
+}
+
+section.logged-in:not(.pet) {
+  padding: 0 25px;
+}
+
+.section-title {
+  font-weight: 300;
+  font-style: normal;
+  font-size: 24px;
+}
+
+#pet_form .form-group, form:not(#pet_form) {
+  width: 230px;
+}
+
+input {
+  border: none;
+  border-bottom: solid 1px #101010;
+}
+input:focus-visible {
+  outline: none;
+}
+
+label:not(.form-check-label) {
+  position: absolute;
+  top: 0;
+}
+
+label,
+input,
+.suffix,
+.input-title {
+  padding: 10px 15px;
+  font-size: 16px;
+}
+
+label,
+input {
+  transition: top 0.3s ease;
+  width: 100%;
+  background: transparent;
+}
+
+.form-group {
+  position: relative;
+}
+.form-group:focus-within label:not(.form-check-label),
+.form-group .label-top {
+  top: -30px;
+}
+
+form.row-flex-column {
+  gap: 35px;
+}
+
+.alert.password-requirements {
+  font-size: 0.9rem;
+}
+
+#pet_form {
+  /**
+   * Toggle
+   * 
+   * Code based on https://codepen.io/valaxin/pen/BjepPG/
+   */
+}
+#pet_form .form-group:has(.form-check-input) {
+  display: flex;
+  padding: 10px 15px;
+}
+#pet_form .form-group:has(.toggle-container) {
+  width: 320px;
+}
+#pet_form .suffix {
+  position: absolute;
+  top: 0;
+  right: 0px;
+}
+#pet_form .form-check-input {
+  width: 30px;
+  height: 30px;
+  accent-color: #101010;
+}
+#pet_form .form-check-label {
+  font-size: 12px;
+}
+#pet_form .toggle-container {
+  /**
+   * Unchecked (default)
+   */
+}
+#pet_form .toggle-container .toggle-bg .toggle-btn::before, #pet_form .toggle-container .toggle-bg .toggle-btn::after, #pet_form .toggle-container .toggle-bg,
+#pet_form .toggle-container .toggle-btn {
+  transition: 400ms all ease-in-out 50ms;
+}
+#pet_form .toggle-container .input-title {
+  font-size: 14px;
+  font-weight: 300;
+  font-style: normal;
+  width: 110px;
+  padding: 5px 10px;
+}
+#pet_form .toggle-container input {
+  display: none;
+  /**
+   * Checked
+   */
+}
+#pet_form .toggle-container input:checked ~ .toggle-bg {
+  background: #089401;
+}
+#pet_form .toggle-container input:checked ~ .toggle-bg .toggle-btn {
+  left: 18.5px;
+  transform: rotate(360deg);
+  background: #f4f4f4;
+}
+#pet_form .toggle-container input:checked ~ .toggle-bg .toggle-btn::after {
+  opacity: 1;
+  width: 100%;
+}
+#pet_form .toggle-container input:checked ~ .toggle-bg .toggle-btn::before {
+  opacity: 0;
+  width: 0px;
+}
+#pet_form .toggle-container .toggle-bg,
+#pet_form .toggle-container .toggle-btn {
+  border-radius: 50px;
+}
+#pet_form .toggle-container .toggle-bg {
+  width: 40px;
+  height: 25px;
+  background: #c32626;
+  position: relative;
+}
+#pet_form .toggle-container .toggle-bg .toggle-btn {
+  height: 18px;
+  width: 18px;
+  background: #f4f4f4;
+  position: absolute;
+  top: 3.5px;
+  left: 3.5px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+#pet_form .toggle-container .toggle-bg .toggle-btn::before, #pet_form .toggle-container .toggle-bg .toggle-btn::after {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 0.8rem;
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+}
+#pet_form .toggle-container .toggle-bg .toggle-btn::before {
+  content: "\f00d";
+  opacity: 1;
+  color: #c32626;
+}
+#pet_form .toggle-container .toggle-bg .toggle-btn::after {
+  content: "\f00c";
+  opacity: 0;
+  width: 0;
+  color: #089401;
+}
+
+.navbar {
+  max-height: 60px;
+}
+.navbar .logo {
+  width: 30px;
+}
+
+.bottom-bar {
+  height: 100px;
+}
+.bottom-bar__btn svg {
+  fill: #7d7d7d;
+  height: 30px;
+}
+.bottom-bar__btn.active svg {
+  fill: #101010;
+}
+.bottom-bar__btn div {
+  font-weight: 300;
+  font-style: normal;
+  font-size: 14px;
+}
+.bottom-bar__fab {
+  border-radius: 100px;
+  width: 70px;
+  height: 70px;
+  border: solid 8px #fff;
+  display: flex;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: -50%;
+  background: #d9d9d9;
+}
+
+.access-portal > .row {
+  margin: 60px 0;
+}
+.access-portal#access_portal .row {
+  gap: 100px;
+}
+.access-portal .logo {
+  width: 200px;
+  height: 200px;
+}
+.access-portal .logo img {
+  object-fit: cover;
+  height: 100%;
+}
+.access-portal .btns {
+  gap: 3rem;
+  margin-bottom: 60px;
+}
+
+.show-password {
+  cursor: pointer;
+  font-size: 1.5rem;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+
+.forgot-password {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#login .row,
+#register .row {
+  gap: 65px;
+}
+
+#settings .row-flex-column {
+  gap: 5rem;
+}
+#settings .row-flex-column .user, #settings .row-flex-column .delete-account {
+  border-top: solid 1px #d9d9d9;
+  border-bottom: solid 1px #d9d9d9;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+#settings .row-flex-column .user .logout, #settings .row-flex-column .delete-account .logout {
+  font-size: 14px;
+  color: red;
+}
+#settings .row-flex-column .delete-account .btn {
+  width: auto;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  padding: 10px 28px;
+}
+
+.pet {
+  background: #7d7d7d;
+}
+.pet__photo-container {
+  height: 200px;
+  position: relative;
+  display: flex;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.pet__photo {
+  background: #d9d9d9;
+  border-radius: 100px;
+  display: flex;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 20%;
+}
+.pet__photo svg {
+  width: 100px;
+  height: 100px;
+  rotate: 30deg;
+  opacity: 0.3;
+}
+.pet .content {
+  background: #f4f4f4;
+  min-height: 100vh;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+.pet .content .form-group {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*# sourceMappingURL=main.css.map */

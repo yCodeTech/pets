@@ -1,0 +1,179 @@
+@use "./mixins" as *;
+@use "./colours" as *;
+@use "./fonts" as *;
+
+%form_width {
+	width: 230px;
+}
+form:not(#pet_form) {
+	@extend %form_width;
+}
+input {
+	border: none;
+	border-bottom: solid 1px $black;
+
+	&:focus-visible {
+		outline: none;
+	}
+}
+
+label:not(.form-check-label) {
+	position: absolute;
+	top: 0;
+}
+label,
+input,
+.suffix,
+.input-title {
+	padding: 10px 15px;
+	font-size: 16px;
+}
+
+label,
+input {
+	transition: top 0.3s ease;
+	width: 100%;
+	background: transparent;
+}
+
+.form-group {
+	position: relative;
+
+	&:focus-within label:not(.form-check-label),
+	.label-top {
+		top: -30px;
+	}
+}
+form.row-flex-column {
+	gap: 35px;
+}
+.alert.password-requirements {
+	font-size: 0.9rem;
+}
+
+#pet_form {
+	.form-group {
+		@extend %form_width;
+
+		&:has(.form-check-input) {
+			@include d-flex;
+			padding: 10px 15px;
+		}
+		&:has(.toggle-container) {
+			width: 320px;
+		}
+	}
+	.suffix {
+		position: absolute;
+		top: 0;
+		right: 0px;
+	}
+	.form-check-input {
+		width: 30px;
+		height: 30px;
+		accent-color: $black;
+	}
+	.form-check-label {
+		font-size: 12px;
+	}
+
+	/**
+	 * Toggle
+	 * 
+	 * Code based on https://codepen.io/valaxin/pen/BjepPG/
+	 */
+
+	.toggle-container {
+		%transition {
+			transition: 400ms all ease-in-out 50ms;
+		}
+		.input-title {
+			font-size: 14px;
+			@include lato-light;
+			width: 110px;
+			padding: 5px 10px;
+		}
+		input {
+			display: none;
+
+			/**
+			 * Checked
+			 */
+
+			// Change toggle background.
+			&:checked ~ .toggle-bg {
+				background: $green;
+			}
+			// Rotate the toggle button
+			&:checked ~ .toggle-bg .toggle-btn {
+				left: 18.5px;
+				transform: rotate(360deg);
+				background: $off-white;
+			}
+			// Show the toggle button ✔ icon
+			&:checked ~ .toggle-bg .toggle-btn::after {
+				opacity: 1;
+				width: 100%;
+			}
+			// Hide the toggle button 🗙 icon
+			&:checked ~ .toggle-bg .toggle-btn::before {
+				opacity: 0;
+				width: 0px;
+			}
+		}
+		.toggle-bg,
+		.toggle-btn {
+			border-radius: 50px;
+			@extend %transition;
+		}
+
+		/**
+		 * Unchecked (default)
+		 */
+
+		.toggle-bg {
+			width: 40px;
+			height: 25px;
+			background: #c32626;
+			// @include border("all", 2px, $dark-grey);
+			position: relative;
+
+			.toggle-btn {
+				height: 18px;
+				width: 18px;
+				background: $off-white;
+				position: absolute;
+				top: 3.5px;
+				left: 3.5px;
+				cursor: pointer;
+				padding: 0;
+				margin: 0;
+				line-height: 1;
+
+				&::before,
+				&::after {
+					font-family: "Font Awesome 6 Free";
+					font-weight: 900;
+					font-size: 0.8rem;
+					width: 100%;
+					display: inline-flex;
+					justify-content: center;
+					@extend %transition;
+				}
+				// FontAwesome 🗙 icon
+				&::before {
+					content: "\f00d";
+					opacity: 1;
+					color: #c32626;
+				}
+				// FontAwesome ✔ icon
+				&::after {
+					content: "\f00c";
+					opacity: 0;
+					width: 0;
+					color: $green;
+				}
+			}
+		}
+	}
+}

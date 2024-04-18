@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+%lato {
+	font-family: "Lato", sans-serif;
+}
+
+// @mixin lato-thin {
+// 	@extend %lato;
+// 	font-weight: 100;
+// 	font-style: normal;
+// }
+
+@mixin lato-light {
+	@extend %lato;
+	font-weight: 300;
+	font-style: normal;
+}
+
+@mixin lato-regular {
+	@extend %lato;
+	font-weight: 400;
+	font-style: normal;
+}
+
+// @mixin lato-bold {
+// 	@extend %lato;
+// 	font-weight: 700;
+// 	font-style: normal;
+// }
+
+@mixin lato-black {
+	@extend %lato;
+	font-weight: 900;
+	font-style: normal;
+}
+
+// @mixin lato-thin-italic {
+// 	@extend %lato;
+// 	font-weight: 100;
+// 	font-style: italic;
+// }
+
+@mixin lato-light-italic {
+	@extend %lato;
+	font-weight: 300;
+	font-style: italic;
+}
+
+@mixin lato-regular-italic {
+	@extend %lato;
+	font-weight: 400;
+	font-style: italic;
+}
+
+// @mixin lato-bold-italic {
+// 	@extend %lato;
+// 	font-weight: 700;
+// 	font-style: italic;
+// }
+
+// @mixin lato-black-italic {
+// 	@extend %lato;
+// 	font-weight: 900;
+// 	font-style: italic;
+// }

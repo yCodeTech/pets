@@ -1,0 +1,68 @@
+@use "./mixins" as *;
+@use "./fonts" as *;
+@use "./colours" as *;
+
+* {
+	@include lato-regular;
+}
+body {
+	font-size: 12px;
+	color: $black;
+}
+a {
+	color: inherit;
+}
+img {
+	width: 100%;
+	object-fit: cover;
+	height: 100%;
+}
+.btn {
+	background: $grey;
+	@include d-flex;
+	@include center;
+	@include round;
+	@include lato-light;
+	padding: 10px 45px;
+	font-size: 24px;
+	width: 150px;
+	line-height: 1;
+
+	&--large {
+		width: 200px;
+		padding: 18px 70px;
+		font-size: 32px;
+	}
+
+	&--secondary {
+		background: $dark-grey;
+		color: $white;
+	}
+	&--danger {
+		color: #fff;
+		background-color: #dc3545;
+		border-color: #dc3545;
+	}
+}
+.go-back {
+	@include align-items-center;
+	gap: 10px;
+	margin-top: 10px;
+}
+.row-flex-column {
+	@include d-flex;
+	flex-direction: column;
+}
+.alert {
+	font-size: 1rem;
+}
+.fixed-bars-offset {
+	margin: 56px 0;
+}
+section.logged-in:not(.pet) {
+	padding: 0 25px;
+}
+.section-title {
+	@include lato-light;
+	font-size: 24px;
+}

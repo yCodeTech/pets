@@ -1,0 +1,25 @@
+@use "./../partials/mixins" as *;
+@use "./../partials/colours" as *;
+
+.access-portal {
+	> .row {
+		margin: 60px 0;
+	}
+	&#access_portal .row {
+		gap: 100px;
+	}
+
+	.logo {
+		width: 200px;
+		height: 200px;
+
+		img {
+			object-fit: cover;
+			height: 100%;
+		}
+	}
+	.btns {
+		gap: 3rem;
+		margin-bottom: 60px;
+	}
+}

@@ -1,0 +1,31 @@
+@use "./../partials/fonts" as *;
+@use "./../partials/mixins" as *;
+@use "./../partials/colours" as *;
+
+#settings {
+	.row-flex-column {
+		gap: 5rem;
+
+		.user {
+			@include border("top", 1px, $grey);
+			@include border("bottom", 1px, $grey);
+			font-size: 20px;
+			@include align-items-center;
+
+			.logout {
+				font-size: 14px;
+				color: red;
+			}
+		}
+		.delete-account {
+			@extend .user;
+
+			.btn {
+				width: auto;
+				font-size: 16px;
+				@include lato-regular;
+				padding: 10px 28px;
+			}
+		}
+	}
+}

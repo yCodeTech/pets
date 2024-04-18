@@ -1,0 +1,17 @@
+.show-password {
+	cursor: pointer;
+	font-size: 1.5rem;
+	position: absolute;
+	right: 10px;
+	top: 5px;
+}
+.forgot-password {
+	text-align: center;
+	margin-top: 20px;
+}
+#login,
+#register {
+	.row {
+		gap: 65px;
+	}
+}

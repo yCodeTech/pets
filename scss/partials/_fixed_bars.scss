@@ -1,0 +1,42 @@
+@use "./mixins" as *;
+@use "./fonts" as *;
+@use "./colours" as *;
+
+.navbar {
+	max-height: 60px;
+
+	.logo {
+		width: 30px;
+	}
+}
+
+.bottom-bar {
+	height: 100px;
+
+	&__btn {
+		svg {
+			fill: $dark-grey;
+			height: 30px;
+		}
+		&.active {
+			svg {
+				fill: $black;
+			}
+		}
+		div {
+			@include lato-light;
+			font-size: 14px;
+		}
+	}
+
+	&__fab {
+		@include round;
+		width: 70px;
+		height: 70px;
+		@include border("all", 8px, $white);
+		@include center;
+		position: absolute;
+		top: -50%;
+		background: $grey;
+	}
+}
