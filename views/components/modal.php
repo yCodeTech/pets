@@ -5,12 +5,13 @@ $btn_class = "btn--danger";
 $btn_txt = "";
 
 if ($type === "delete_pet") {
-	$title .= '<span class="text-danger">delete' . $postback_value["name"] . '?</span>';
+	$title .= '<span class="text-danger">delete ' . $postback_value["name"] . '?</span>';
 	$form_action = "/delete";
+	$btn_txt = "Delete";
 	$form_id = "pet_form";
 }
 elseif ($type === "delete_account") {
-	$title = '<span class="text-danger">delete your account?</span>';
+	$title .= '<span class="text-danger">delete your account?</span>';
 	$btn_txt = "Delete Account";
 	$form_action = "/delete";
 	$form_id = "pet_form";
@@ -39,31 +40,25 @@ elseif ($type === "book_vets") {
 			</button>
 		</div>
 
-
+		<?php if ($type === "book_vets") : ?>
 		<div class="appointment">
-			<div>
-				<?php echo $extra["formatted_booking_date"]; ?>
-			</div>
-			<div>
-				<?php echo $postback_value["time"]; ?>
-			</div>
-			<div>
-				<?php echo $postback_value["surgery"]; ?>
-			</div>
+			<div><?php echo $extra["formatted_booking_date"]; ?></div>
+			<div><?php echo $postback_value["time"]; ?></div>
+			<div><?php echo $postback_value["surgery"]; ?></div>
+
 			<div class="row">
-				<div class="vet">
-					<?php echo $postback_value["vet"]; ?>
-				</div>
+				<div class="vet"><?php echo $postback_value["vet"]; ?></div>
 				<div class="pets-selected">
-					<?php
-					foreach ($extra["pet_details"] as $key => $value) {
-						echo $value["name"];
-					}
-					?>
+			<?php
+			foreach ($extra["pet_details"] as $key => $value) {
+				echo $value["name"];
+			}
+			?>
 				</div>
 
 			</div>
 		</div>
+		<?php endif; ?>
 
 		
 		<div class="modal-footer">
