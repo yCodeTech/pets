@@ -206,14 +206,14 @@ elseif ($server_uri === "/book_vets") {
 			$pet_details[] = $user->get_pet($value);
 		}
 
-		$booking_details = $user->format_date($data["postback_value"]["date"], "l jS F");
+		$vet_individual = (new Vets())->get_one_vet_and_surgery($data["postback_value"]["vet"]);
 	}
 
 	$vets_data = (new Vets())->get_data();
 	
 	$extra = [
 		"pet_details" => $pet_details ?? [],
-		"formatted_booking_date" => $booking_details ?? ""
+		"vet_individual" => $vet_individual ?? []
 	];
 
 	$data = array_merge($data, $vets_data, ["pets" => $user->get_pets()], ["extra" => $extra]);

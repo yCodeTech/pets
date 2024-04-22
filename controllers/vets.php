@@ -32,4 +32,11 @@ class Vets {
 		}
 		return $data;
 	}
+
+	public function get_one_vet_and_surgery($vet_id) {
+		$vet = $this->model->select_one("vet_staff", "*", ["id" => $vet_id]);
+		$surgery = $this->model->select_one("vet_surgery", "*", ["id" => $vet["surgery_id"]]);
+
+		return ["vet" => $vet, "surgery" => $surgery];
+	}
 }

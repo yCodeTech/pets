@@ -647,5 +647,43 @@ form.row-flex-column {
 #book_vets_confirm .icon svg {
   fill: url(#gradient);
 }
+#book_vets_confirm .appointment {
+  padding: 3rem;
+  gap: 20px;
+}
+#book_vets_confirm .appointment::before {
+  content: "";
+  height: 3px;
+  width: 115px;
+  position: relative;
+  left: -15px;
+  background: linear-gradient(to right, #a3d3f2, #d6beee);
+}
+#book_vets_confirm .appointment__item {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#book_vets_confirm .appointment__item p {
+  margin: inherit;
+}
+#book_vets_confirm .appointment__item i:not(.fa-user) {
+  font-size: 1.3rem;
+}
+#book_vets_confirm .appointment__item.vet-and-pets {
+  gap: 15px;
+  overflow: auto;
+}
+#book_vets_confirm .appointment__item.vet-and-pets .vet-selection .item {
+  padding-right: 15px;
+  border-right: solid 1px #101010;
+}
+#book_vets_confirm .appointment__item.vet-and-pets .item__name {
+  width: max-content;
+}
+#book_vets_confirm .appointment__item.vet-and-pets .item__photo {
+  border-color: #5dbf6d;
+}
 
 /*# sourceMappingURL=main.css.map */

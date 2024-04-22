@@ -35,7 +35,7 @@ class User extends BaseController {
 
 		$data = $this->model->select_one("pet", "*", ["id" => $id]);
 		$data["age"] = $this->calc_pet_age($data["birthday"]);
-		$data["birthday_formatted"] = $this->format_date($data["birthday"]);
+		$data["birthday_formatted"] = format_date($data["birthday"]);
 
 		return $data;
 	}
@@ -60,8 +60,5 @@ class User extends BaseController {
 
 	private function calc_pet_age($birthday) {
 		return date("Y") - date('Y', strtotime($birthday));
-	}
-	public function format_date($date, $format = "j/n/Y") {
-		return date($format, strtotime($date));
 	}
 }

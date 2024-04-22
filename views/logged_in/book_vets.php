@@ -92,12 +92,13 @@
 		</div>
 
 	</form>
+
+	<?php if (isset($confirm_booking)) :
+		include_view("components/modal", ["type" => "book_vets", "postback_value" => $data["postback_value"], "extra" => $extra]);
+		?>
+
+	<script>setTimeout(()=>jQuery('#book_vets_confirm').modal("show"), 10);</script>
+
+	<?php endif; ?>
+
 </section>
-
-<?php if (isset($confirm_booking)) :
-	include_view("components/modal", ["type" => "book_vets", "postback_value" => $data["postback_value"], "extra" => $extra]);
-	?>
-
-<script>setTimeout(()=>jQuery('#book_vets_confirm').modal("show"), 10);</script>
-
-<?php endif; ?>

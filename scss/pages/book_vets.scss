@@ -70,4 +70,51 @@
 			fill: url(#gradient);
 		}
 	}
+
+	.appointment {
+		padding: 3rem;
+		gap: 20px;
+
+		&::before {
+			content: "";
+			height: 3px;
+			width: 115px;
+			position: relative;
+			left: -15px;
+			background: $gradient;
+		}
+
+		&__item {
+			font-size: 14px;
+			@include align-items-center;
+			gap: 10px;
+
+			p {
+				margin: inherit;
+			}
+			i:not(.fa-user) {
+				font-size: 1.3rem;
+			}
+
+			&.vet-and-pets {
+				gap: 15px;
+				overflow: auto;
+
+				.vet-selection {
+					.item {
+						padding-right: 15px;
+						@include border("right", 1px, $black);
+					}
+				}
+				.item {
+					&__name {
+						width: max-content;
+					}
+					&__photo {
+						border-color: $primary_green;
+					}
+				}
+			}
+		}
+	}
 }

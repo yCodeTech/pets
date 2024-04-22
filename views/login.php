@@ -19,7 +19,7 @@
 				<?php echo $errors["password"] ?? ""; ?>
 
 				<div class="forgot-password">
-					<a href="">Forgot password?</a>
+					<!-- <a href="">Forgot password?</a> -->
 				</div>
 
 				<?php echo $errors["login"] ?? ""; ?>

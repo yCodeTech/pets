@@ -241,3 +241,10 @@ function get_boolean_icon($value) {
 	}
 	return "<i class='fa-solid fa-$faclass ml-2'></i>";
 }
+
+function format_date($date, $format = "j/n/Y") {
+	return date($format, strtotime($date));
+}
+function format_time($time, $format = "g:ia") {
+	return date($format, strtotime($time));
+}
