@@ -18,7 +18,10 @@
 			}
 		}
 		.delete-account {
-			@extend .user;
+			padding: 2rem 0;
+			margin-top: 3rem;
+			@include border("top", 1px, $red);
+			@include border("bottom", 1px, $red);
 
 			.btn {
 				width: auto;

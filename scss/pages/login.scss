@@ -1,9 +1,16 @@
+@use "./../partials/colours" as *;
+
 .show-password {
 	cursor: pointer;
 	font-size: 1.5rem;
 	position: absolute;
 	right: 10px;
 	top: 5px;
+	color: $green;
+
+	&:has(.fa-eye-slash) {
+		color: $red;
+	}
 }
 .forgot-password {
 	text-align: center;

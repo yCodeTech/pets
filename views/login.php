@@ -2,7 +2,7 @@
 	<div class="row no-gutters justify-content-center">
 		<?php include_view("components/large_logo"); ?>
 
-		<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="login_form" class="row-flex-column">
+		<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" id="login_form" class="row-flex-column">
 			<div class="form-group">
 				<label for="email">Email</label>
 				<input type="text" name="email" id="email" value="<?php echo $postback_value["email"] ?? ""; ?>">
@@ -27,7 +27,7 @@
 			</div>
 
 			<div class="form-group d-flex justify-content-center">
-				<input type="submit" name="submit" id="login" class="btn" value="Login">
+				<input type="submit" name="submit" id="login" class="btn btn--primary" value="Login">
 			</div>
 		</form>
 	</div>

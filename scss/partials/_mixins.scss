@@ -1,3 +1,6 @@
+@use "./../partials/colours" as *;
+@use "sass:color";
+
 @mixin d-flex {
 	display: flex;
 }
@@ -34,4 +37,14 @@
 	} @else {
 		border-#{$side}: solid $width $colour;
 	}
+}
+
+@function colour_less_opacity($colour, $amount) {
+	@return transparentize($colour, $amount);
+}
+
+@mixin text-gradient {
+	background: $gradient--darker;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
 }

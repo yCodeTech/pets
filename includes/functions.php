@@ -132,11 +132,14 @@ function is_allowed_fab() {
 	$not_allowed_pages = [
 		"/settings",
 		"/add_pet",
-		"/book_vets"
+		"/ed_pet",
+		"/book_vets",
+		"/pet_profile"
 	];
-
-	if (in_array($server_uri, $not_allowed_pages)) {
-		return false;
+	foreach ($not_allowed_pages as $page) {
+		if (str_contains($server_uri, $page)) {
+			return false;
+		}
 	}
 	return true;
 }
@@ -144,8 +147,13 @@ function is_allowed_fab() {
 function is_protected_page() {
 	$server_uri = get_server_uri();
 
-	if (in_array($server_uri, PROTECTED_PAGES)) {
-		return true;
+	foreach (PROTECTED_PAGES as $page) {
+		if (str_contains($server_uri, $page)) {
+			return true;
+		}
+		else {
+			continue;
+		}
 	}
 	return false;
 }
@@ -159,14 +167,77 @@ function active_page($link_name) {
 	return "";
 }
 
-function display_toggle_input($name) {
+function display_toggle_input($name, $postback_value) {
+	$value = $postback_value;
+	$is_checked = is_checked("yes", $value);
+
 	$id = str_replace([" ", "-"], "_", strtolower($name));
 
+
 	return "<div class='toggle-container d-flex align-items-center'>
-				<input type='checkbox' id='$id' name='$id'>
+				<input type='checkbox' id='$id' name='$id' value='yes' $is_checked>
 				<div class='toggle-bg'>
-					<label for='$id' class='toggle-btn'></label>
+					<div class='toggle-btn'></div>
 				</div>
-				<div class='input-title'>$name</div>
+				<label class='input-title'>$name</label>
 			</div>";
+}
+
+/**
+ * Check if a specific checkbox was originally checked before the form posted back to it's self.
+ * If the checkbox matches the postback value, then add a data-checked attribute to use via JS.
+ *
+ * @param string $name The name of the field
+ * @param array $postback_value The values posted back to the form after submit.
+ */
+function is_checked($name, $postback_value) {
+	if (isset($postback_value)) {
+		if (is_array($postback_value)) {
+			// foreach ($postback_value as $key => $value) {
+			if (in_array($name, $postback_value)) {
+				return "checked";
+			}
+			// }
+		}
+
+		elseif ($postback_value == $name) {
+			return "checked";
+		}
+	}
+	return "";
+}
+
+/**
+ * Check if a certain select option was orignally selected before the form posted back to it's self.
+ * If the certain option matches the postback value, then add a selected attribute.
+ *
+ * @param string $name The name of the field
+ * @param array $postback_value The values posted back to the form after submit.
+ */
+function is_selected($name, $postback_value) {
+	if (!empty($postback_value)) {
+		if ($postback_value == $name) {
+			return "selected";
+		}
+	}
+	return "";
+}
+
+function get_gender_icon($gender) {
+	if ($gender === "male") {
+		$faclass = "mars";
+	}
+	else {
+		$faclass = "venus";
+	}
+	return "<i class='fa-solid fa-$faclass ml-2'></i>";
+}
+function get_boolean_icon($value) {
+	if ($value === "yes") {
+		$faclass = "check";
+	}
+	else {
+		$faclass = "xmark";
+	}
+	return "<i class='fa-solid fa-$faclass ml-2'></i>";
 }

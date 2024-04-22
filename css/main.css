@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
-#settings .row-flex-column .delete-account .btn, .bottom-bar__btn div, #pet_form .toggle-container .input-title, *, .btn, .section-title {
+#book_vets label,
+#book_vets .input-title, #view_pets .pets .pet__content__name, #view_pets .pets .pet__content__breed, #view_pets .pets .pet__content__age, #pet_profile .name, #pet_profile .name .nickname, #pet_profile .items .item h4, #pet_profile .items .btn,
+#edit_pet .delete-pet .btn, .modal[id*=delete] .btn--danger, #settings .row-flex-column .delete-account .btn, .bottom-bar__btn div, #pet_form .toggle-container .input-title, *, .btn, .btn-outline--secondary, .section-title {
   font-family: "Lato", sans-serif;
 }
 
@@ -14,6 +16,10 @@ body {
 }
 
 a {
+  color: inherit;
+  text-decoration: none !important;
+}
+a:hover {
   color: inherit;
 }
 
@@ -44,14 +50,31 @@ img {
   padding: 18px 70px;
   font-size: 32px;
 }
-.btn--secondary {
-  background: #7d7d7d;
+.btn--primary {
+  background: linear-gradient(to right, #a3d3f2, #d6beee);
   color: #fff;
+}
+.btn--secondary {
+  background: none;
+  color: #101010;
 }
 .btn--danger {
   color: #fff;
   background-color: #dc3545;
   border-color: #dc3545;
+}
+.btn--success {
+  background-color: #5dbf6d;
+  border-color: #5dbf6d;
+  color: #fff;
+}
+.btn-outline--secondary {
+  color: #101010;
+  background: none;
+  border: solid 1px #d9d9d9;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
 }
 
 .go-back {
@@ -71,11 +94,20 @@ img {
 }
 
 .fixed-bars-offset {
-  margin: 56px 0;
+  margin: 60px 0;
+  margin-bottom: 0;
+}
+
+section {
+  min-height: calc(100vh - 60px - 60px);
 }
 
 section.logged-in:not(.pet) {
   padding: 0 25px;
+}
+
+section.logged-in:not(#settings):not(#book_vets) {
+  background: linear-gradient(to right, #a3d3f2, #d6beee);
 }
 
 .section-title {
@@ -84,19 +116,31 @@ section.logged-in:not(.pet) {
   font-size: 24px;
 }
 
-#pet_form .form-group, form:not(#pet_form) {
+#pet_form .form-group, form:not(#pet_form):not(#vet_form):not(#booking_form) {
   width: 230px;
 }
 
-input {
+input,
+.custom-select {
   border: none;
   border-bottom: solid 1px #101010;
+  border-radius: 0;
 }
-input:focus-visible {
+input:focus-visible,
+.custom-select:focus-visible {
   outline: none;
 }
+input:focus,
+.custom-select:focus {
+  border-color: inherit;
+  box-shadow: none;
+}
 
-label:not(.form-check-label) {
+.custom-select {
+  background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 320 512'%3e%3cpath fill='%23343a40' d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z'/%3e%3c/svg%3e") right 0.75rem center/8px 10px no-repeat;
+}
+
+label:not(.form-check-label):not(.input-title):not(.surgery):not(.no-label-top) {
   position: absolute;
   top: 0;
 }
@@ -119,8 +163,8 @@ input {
 .form-group {
   position: relative;
 }
-.form-group:focus-within label:not(.form-check-label),
-.form-group .label-top {
+.form-group:focus-within label:not(.form-check-label):not(.input-title):not(.no-label-top),
+.form-group .label-top:not(.input-title) {
   top: -30px;
 }
 
@@ -145,6 +189,7 @@ form.row-flex-column {
 }
 #pet_form .form-group:has(.toggle-container) {
   width: 320px;
+  gap: 15px;
 }
 #pet_form .suffix {
   position: absolute;
@@ -160,6 +205,7 @@ form.row-flex-column {
   font-size: 12px;
 }
 #pet_form .toggle-container {
+  cursor: pointer;
   /**
    * Unchecked (default)
    */
@@ -174,6 +220,8 @@ form.row-flex-column {
   font-style: normal;
   width: 110px;
   padding: 5px 10px;
+  margin: 0;
+  cursor: pointer;
 }
 #pet_form .toggle-container input {
   display: none;
@@ -217,7 +265,6 @@ form.row-flex-column {
   cursor: pointer;
   padding: 0;
   margin: 0;
-  line-height: 1;
 }
 #pet_form .toggle-container .toggle-bg .toggle-btn::before, #pet_form .toggle-container .toggle-bg .toggle-btn::after {
   font-family: "Font Awesome 6 Free";
@@ -241,9 +288,14 @@ form.row-flex-column {
 
 .navbar {
   max-height: 60px;
+  background: #f4f4f4;
 }
 .navbar .logo {
-  width: 30px;
+  width: 50%;
+  padding: 0;
+}
+.navbar .settings {
+  color: #7d7d7d;
 }
 
 .bottom-bar {
@@ -254,7 +306,7 @@ form.row-flex-column {
   height: 30px;
 }
 .bottom-bar__btn.active svg {
-  fill: #101010;
+  fill: url(#gradient);
 }
 .bottom-bar__btn div {
   font-weight: 300;
@@ -263,9 +315,8 @@ form.row-flex-column {
 }
 .bottom-bar__fab {
   border-radius: 100px;
-  width: 70px;
-  height: 70px;
-  border: solid 8px #fff;
+  width: 60px;
+  height: 60px;
   display: flex;
   display: flex;
   justify-content: center;
@@ -273,11 +324,15 @@ form.row-flex-column {
   align-items: center;
   position: absolute;
   top: -50%;
-  background: #d9d9d9;
+  background: #5dbf6d;
+  color: #fff;
+}
+.bottom-bar__fab:hover {
+  color: #fff;
 }
 
 .access-portal > .row {
-  margin: 60px 0;
+  padding: 50px 0;
 }
 .access-portal#access_portal .row {
   gap: 100px;
@@ -301,6 +356,10 @@ form.row-flex-column {
   position: absolute;
   right: 10px;
   top: 5px;
+  color: #089401;
+}
+.show-password:has(.fa-eye-slash) {
+  color: #dc3545;
 }
 
 .forgot-password {
@@ -316,16 +375,22 @@ form.row-flex-column {
 #settings .row-flex-column {
   gap: 5rem;
 }
-#settings .row-flex-column .user, #settings .row-flex-column .delete-account {
+#settings .row-flex-column .user {
   border-top: solid 1px #d9d9d9;
   border-bottom: solid 1px #d9d9d9;
   font-size: 20px;
   display: flex;
   align-items: center;
 }
-#settings .row-flex-column .user .logout, #settings .row-flex-column .delete-account .logout {
+#settings .row-flex-column .user .logout {
   font-size: 14px;
   color: red;
+}
+#settings .row-flex-column .delete-account {
+  padding: 2rem 0;
+  margin-top: 3rem;
+  border-top: solid 1px #dc3545;
+  border-bottom: solid 1px #dc3545;
 }
 #settings .row-flex-column .delete-account .btn {
   width: auto;
@@ -336,7 +401,7 @@ form.row-flex-column {
 }
 
 .pet {
-  background: #7d7d7d;
+  background: linear-gradient(to right, #a3d3f2, #d6beee);
 }
 .pet__photo-container {
   height: 200px;
@@ -346,6 +411,7 @@ form.row-flex-column {
   justify-content: center;
   display: flex;
   align-items: center;
+  z-index: 1;
 }
 .pet__photo {
   background: #d9d9d9;
@@ -367,14 +433,219 @@ form.row-flex-column {
   opacity: 0.3;
 }
 .pet .content {
-  background: #f4f4f4;
+  background: rgba(244, 244, 244, 0.7);
+  backdrop-filter: blur(15px);
   min-height: 100vh;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
+  padding: 20px;
 }
 .pet .content .form-group {
   margin-left: auto;
   margin-right: auto;
+}
+
+#pet_profile .name, #view_pets .pets .pet__content__name {
+  font-weight: 900;
+  font-style: normal;
+  font-size: 32px;
+}
+
+#view_pets .pets {
+  gap: 20px;
+  align-items: end;
+}
+#view_pets .pets .pet {
+  background: none;
+  color: #101010;
+}
+#view_pets .pets .pet__photo {
+  background: #f4f4f4;
+  width: 120px;
+  height: 120px;
+  top: unset;
+  left: 30px;
+  z-index: 1;
+}
+#view_pets .pets .pet__photo svg {
+  width: 60px;
+  height: 60px;
+}
+#view_pets .pets .pet__content {
+  background: rgba(244, 244, 244, 0.5019607843);
+  width: 222px;
+  height: 110px;
+  padding-left: 3rem;
+  padding-right: 1.5rem;
+  gap: 15px;
+}
+#view_pets .pets .pet__content__gender {
+  font-size: 1rem;
+}
+#view_pets .pets .pet__content__breed, #view_pets .pets .pet__content__age {
+  font-weight: 300;
+  font-style: normal;
+  font-size: 14px;
+}
+#view_pets .alert.deleted-pet {
+  bottom: 100px;
+  width: 80%;
+}
+
+#pet_profile .content {
+  padding-bottom: 50px;
+}
+#pet_profile .section-title {
+  background: linear-gradient(to right, #1f92dd, #8a45ce 40%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#pet_profile .name .nickname {
+  font-weight: 300;
+  font-style: normal;
+  font-size: 20px;
+}
+#pet_profile .items {
+  padding: 0 2rem;
+  gap: 30px;
+}
+#pet_profile .items .item {
+  gap: 8px;
+}
+#pet_profile .items .item h4 {
+  font-weight: 300;
+  font-style: normal;
+  font-size: 20px;
+  margin: 0;
+}
+#pet_profile .items .item p {
+  font-size: 16px;
+  max-width: 80px;
+  text-align: center;
+  margin: 0;
+  line-height: 1;
+}
+#pet_profile .items .item p .fa-xmark {
+  color: #dc3545;
+}
+#pet_profile .items .item p .fa-check {
+  color: #089401;
+}
+#pet_profile .items .placeholder {
+  width: 100%;
+  height: 50px;
+  background: #7d7d7d;
+  border-radius: 10px;
+}
+
+#pet_profile .items .btn,
+#edit_pet .delete-pet .btn {
+  width: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+}
+
+#edit_pet .delete-pet {
+  padding: 2rem 0;
+  margin-top: 8rem;
+  border-top: solid 1px #dc3545;
+  border-bottom: solid 1px #dc3545;
+}
+#edit_pet .cancel {
+  color: #dc3545;
+}
+
+.modal[id*=delete] .btn--danger {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+}
+
+#book_vets {
+  padding-bottom: 50px;
+}
+#book_vets .section-title {
+  background: linear-gradient(to right, #1f92dd, #8a45ce 40%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#book_vets label,
+#book_vets .input-title {
+  font-weight: 300;
+  font-style: normal;
+  padding: 0;
+}
+#book_vets .form-group {
+  margin: 0;
+}
+#book_vets .note {
+  font-size: 14px;
+  color: #7d7d7d;
+}
+#book_vets .vet-selection,
+#book_vets .pet-selection {
+  gap: 10px;
+  padding: 10px 0;
+}
+#book_vets .vet-selection .vet,
+#book_vets .vet-selection .item,
+#book_vets .pet-selection .vet,
+#book_vets .pet-selection .item {
+  padding: 0;
+}
+#book_vets .vet-selection .vet input,
+#book_vets .vet-selection .item input,
+#book_vets .pet-selection .vet input,
+#book_vets .pet-selection .item input {
+  display: none;
+}
+#book_vets .vet-selection .vet input:checked ~ label .item__photo,
+#book_vets .vet-selection .item input:checked ~ label .item__photo,
+#book_vets .pet-selection .vet input:checked ~ label .item__photo,
+#book_vets .pet-selection .item input:checked ~ label .item__photo {
+  border-color: #5dbf6d;
+}
+#book_vets .vet-selection .vet label,
+#book_vets .vet-selection .item label,
+#book_vets .pet-selection .vet label,
+#book_vets .pet-selection .item label {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+#book_vets .vet-selection .vet__photo,
+#book_vets .vet-selection .item__photo,
+#book_vets .pet-selection .vet__photo,
+#book_vets .pet-selection .item__photo {
+  background: #d9d9d9;
+  border: solid 3px #7d7d7d;
+  border-radius: 100px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  display: flex;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  color: #7d7d7d;
+}
+#book_vets .vet-selection .vet__photo svg,
+#book_vets .vet-selection .item__photo svg,
+#book_vets .pet-selection .vet__photo svg,
+#book_vets .pet-selection .item__photo svg {
+  width: 30px;
+  height: 30px;
+  rotate: 30deg;
+  opacity: 0.3;
+}
+
+#book_vets_confirm .icon {
+  width: 40px;
+  height: 40px;
+}
+#book_vets_confirm .icon svg {
+  fill: url(#gradient);
 }
 
 /*# sourceMappingURL=main.css.map */

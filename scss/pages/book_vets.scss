@@ -1,0 +1,73 @@
+@use "./../partials/mixins" as *;
+@use "./../partials/fonts" as *;
+@use "./../partials/colours" as *;
+
+#book_vets {
+	padding-bottom: 50px;
+
+	.section-title {
+		@include text-gradient;
+	}
+	label,
+	.input-title {
+		@include lato-light;
+		padding: 0;
+	}
+	.form-group {
+		margin: 0;
+	}
+	.note {
+		font-size: 14px;
+		color: $dark-grey;
+	}
+
+	.vet-selection,
+	.pet-selection {
+		gap: 10px;
+		padding: 10px 0;
+
+		.vet,
+		.item {
+			padding: 0;
+
+			input {
+				display: none;
+
+				&:checked ~ label .item__photo {
+					border-color: $primary_green;
+				}
+			}
+			label {
+				@include align-items-center;
+				padding: 0;
+			}
+			&__photo {
+				background: $grey;
+				@include border(all, 3px, $dark-grey);
+				border-radius: 100px;
+				width: 50px;
+				height: 50px;
+				@include center;
+				color: $dark-grey;
+
+				svg {
+					width: 30px;
+					height: 30px;
+					rotate: 30deg;
+					opacity: 0.3;
+				}
+			}
+		}
+	}
+}
+
+#book_vets_confirm {
+	.icon {
+		width: 40px;
+		height: 40px;
+
+		svg {
+			fill: url(#gradient);
+		}
+	}
+}

@@ -7,6 +7,7 @@ namespace Pet;
 use Controllers\BaseController;
 use Controllers\FormValidation;
 use Controllers\User;
+use Controllers\Vets;
 
 session_start();
 
@@ -24,6 +25,10 @@ autoload_classes();
 set_php_error_reporting(1);
 
 $controller = new BaseController();
+
+if (is_logged_in()) {
+	$user = new User($_SESSION["user"]);
+}
 
 $controller->load_view("header");
 
@@ -68,6 +73,17 @@ elseif ($server_uri === "/login") {
 	}
 }
 /**
+ * Logout
+ */
+elseif ($server_uri === "/logout") {
+	// Unset all session keys.
+	session_unset();
+	
+	$_SESSION["loggedout"] = true;
+
+	header("Location: /access_portal");
+}
+/**
  * Register
  */
 elseif ($server_uri === "/register") {
@@ -93,36 +109,118 @@ elseif ($server_uri === "/register") {
  * View Pets
  */
 elseif ($server_uri === "/view_pets") {
-	$controller->load_view("logged_in/index", ["viewname" => "view_pets"]);
+	$data = $user->get_pets();
+	$controller->load_view("logged_in/index", ["viewname" => "view_pets", "pets" => $data]);
 }
 
 /**
- * Settings
+ * Pet Profile
  */
-elseif ($server_uri === "/settings") {
-	$data = (new User($_SESSION["user"]))->get_data();
-
-	$controller->load_view("logged_in/index", ["viewname" => "settings", "data" => $data]);
+elseif (str_contains($server_uri, "/pet_profile")) {
+	$data = $user->get_pet($_GET["id"]);
+	$controller->load_view("logged_in/index", ["viewname" => "pet_profile", "pet" => $data]);
 }
 
 /**
  * Add Pet
  */
 elseif ($server_uri === "/add_pet") {
-	$controller->load_view("logged_in/index", ["viewname" => "add_pet"]);
+	$data = (new FormValidation("add_pet"))->validate();
+
+	if (is_array($data) || is_null($data)) {
+		$controller->load_view("logged_in/index", ["viewname" => "pet_form", "data" => $data]);
+	}
+	elseif ($data === false) {
+		http_response_code(500);
+		$controller->load_view("http_errors/500");
+	}
+	else {
+		header("Location: /view_pets");
+	}
 }
 
 /**
- * Logout
+ * Edit Pet
  */
-elseif ($server_uri === "/logout") {
-	// Unset all session keys.
-	session_unset();
+elseif (str_contains($server_uri, "/edit_pet")) {
+	$id = $_GET["id"];
+	// If the form validation is null, just get the pet info from database
+	// (form validation will only be not not when the update btn is clicked).
+	$data = (new FormValidation("edit_pet"))->validate() ?? $user->get_pet($id);
 	
-	$_SESSION["loggedout"] = true;
-
-	header("Location: /access_portal");
+	if (is_array($data) || is_null($data)) {
+		$controller->load_view("logged_in/index", [
+			"viewname" => "pet_form",
+			"postback_value" => $data,
+			"go_back_url" => "/pet_profile?id=$id",
+			"pet_id" => $id
+		]);
+	}
+	elseif ($data === false) {
+		http_response_code(500);
+		$controller->load_view("http_errors/500");
+	}
+	else {
+		header("Location: /pet_profile?id=$id");
+	}
 }
+
+/**
+ * Delete (a pet or an account)
+ */
+elseif ($server_uri === "/delete") {
+	$data = $user->delete();
+
+	if ($data === false) {
+		http_response_code(500);
+		$controller->load_view("http_errors/500");
+	}
+	else {
+		if ($_SESSION["deleted_account"]) {
+		// Unset all session keys.
+			unset($_SESSION["user"]);
+			header("Location: /access_portal");
+		}
+		elseif ($_SESSION["deleted_pet"]) {
+			header("Location: /view_pets");
+		}
+	}
+}
+
+/**
+ * Settings
+ */
+elseif ($server_uri === "/settings") {
+	$data = $user->get_details();
+
+	$controller->load_view("logged_in/index", ["viewname" => "settings", "data" => $data]);
+}
+/**
+ * Book Vets
+ */
+elseif ($server_uri === "/book_vets") {
+	$data = (new FormValidation("book_vets"))->validate() ?? [];
+
+	if (isset($data["confirm_booking"])) {
+		foreach ($data["postback_value"]["pet"] as $key => $value) {
+			$pet_details[] = $user->get_pet($value);
+		}
+
+		$booking_details = $user->format_date($data["postback_value"]["date"], "l jS F");
+	}
+
+	$vets_data = (new Vets())->get_data();
+	
+	$extra = [
+		"pet_details" => $pet_details ?? [],
+		"formatted_booking_date" => $booking_details ?? ""
+	];
+
+	$data = array_merge($data, $vets_data, ["pets" => $user->get_pets()], ["extra" => $extra]);
+
+	$controller->load_view("logged_in/index", ["viewname" => "book_vets", "data" => $data]);
+}
+
 
 else {
 	http_response_code(404);

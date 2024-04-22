@@ -1,6 +1,20 @@
+@use "sass:color";
+
 $white: #fff;
 $off-white: #f4f4f4;
+$off-white-o50: #f4f4f480;
 $grey: #d9d9d9;
 $dark-grey: #7d7d7d;
 $black: #101010;
 $green: #089401;
+$red: #dc3545;
+
+$primary_green: #5dbf6d;
+$primary_green-o50: #5dbf6d80;
+$primary_blue: #a3d3f2;
+$primary_purple: #d6beee;
+$primary_blue--darker: darken($primary_blue, 30%);
+$primary_purple--darker: darken($primary_purple, 30%);
+
+$gradient: linear-gradient(to right, $primary_blue, $primary_purple);
+$gradient--darker: linear-gradient(to right, $primary_blue--darker, $primary_purple--darker 40%);

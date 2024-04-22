@@ -2,7 +2,7 @@
 	<div class="row no-gutters justify-content-center">
 		<?php include_view("components/large_logo"); ?>
 
-		<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="register_form" class="row-flex-column">
+		<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" id="register_form" class="row-flex-column">
 			<div class="form-group">
 				<label for="firstname">Firstname</label>
 				<input type="text" name="firstname" id="firstname" value="<?php echo $postback_value["firstname"] ?? ""; ?>">
@@ -39,7 +39,7 @@
 				<?php echo $errors["password"] ?? ""; ?>
 			</div>
 			<div class="form-group d-flex justify-content-center">
-				<input type="submit" name="submit" id="register" class="btn" value="Register">
+				<input type="submit" name="submit" id="register" class="btn btn--primary" value="Register">
 			</div>
 		</form>
 

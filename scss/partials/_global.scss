@@ -11,6 +11,11 @@ body {
 }
 a {
 	color: inherit;
+	text-decoration: none !important;
+
+	&:hover {
+		color: inherit;
+	}
 }
 img {
 	width: 100%;
@@ -33,15 +38,31 @@ img {
 		padding: 18px 70px;
 		font-size: 32px;
 	}
-
-	&--secondary {
-		background: $dark-grey;
+	&--primary {
+		background: $gradient;
 		color: $white;
 	}
+	&--secondary {
+		background: none;
+		color: $black;
+	}
+
 	&--danger {
-		color: #fff;
-		background-color: #dc3545;
-		border-color: #dc3545;
+		color: $white;
+		background-color: $red;
+		border-color: $red;
+	}
+	&--success {
+		background-color: $primary_green;
+		border-color: $primary_green;
+		color: $white;
+	}
+	&-outline--secondary {
+		color: $black;
+		background: none;
+		@include border("all", 1px, $grey);
+		@include lato-regular;
+		font-size: 18px;
 	}
 }
 .go-back {
@@ -56,11 +77,19 @@ img {
 .alert {
 	font-size: 1rem;
 }
+$fixed-bars-height: 60px;
 .fixed-bars-offset {
-	margin: 56px 0;
+	margin: $fixed-bars-height 0;
+	margin-bottom: 0;
+}
+section {
+	min-height: calc(100vh - $fixed-bars-height - 60px);
 }
 section.logged-in:not(.pet) {
 	padding: 0 25px;
+}
+section.logged-in:not(#settings):not(#book_vets) {
+	background: $gradient;
 }
 .section-title {
 	@include lato-light;

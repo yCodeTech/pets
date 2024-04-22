@@ -1,0 +1,174 @@
+@use "./../partials/mixins" as *;
+@use "./../partials/fonts" as *;
+@use "./../partials/colours" as *;
+
+.pet {
+	background: $gradient;
+
+	&__photo-container {
+		height: 200px;
+		position: relative;
+		@include center;
+		z-index: 1;
+	}
+	&__photo {
+		background: $grey;
+		@include round;
+		@include center;
+		width: 200px;
+		height: 200px;
+		position: absolute;
+		top: 20%;
+
+		svg {
+			width: 100px;
+			height: 100px;
+			rotate: 30deg;
+			opacity: 0.3;
+		}
+	}
+
+	.content {
+		background: colour_less_opacity($off-white, 0.3);
+		backdrop-filter: blur(15px);
+		min-height: 100vh;
+		border-top-left-radius: 30px;
+		border-top-right-radius: 30px;
+		padding: 20px;
+
+		.form-group {
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+}
+%pet_name {
+	@include lato-black;
+	font-size: 32px;
+}
+#view_pets {
+	.pets {
+		gap: 20px;
+		align-items: end;
+
+		.pet {
+			background: none;
+			color: $black;
+
+			&__photo {
+				background: $off-white;
+				width: 120px;
+				height: 120px;
+				top: unset;
+				left: 30px;
+				z-index: 1;
+
+				svg {
+					width: 60px;
+					height: 60px;
+				}
+			}
+			&__content {
+				background: $off-white-o50;
+				width: 222px;
+				height: 110px;
+				padding-left: 3rem;
+				padding-right: 1.5rem;
+				gap: 15px;
+
+				&__name {
+					@extend %pet_name;
+				}
+				&__gender {
+					font-size: 1rem;
+				}
+				&__breed,
+				&__age {
+					@include lato-light;
+					font-size: 14px;
+				}
+			}
+		}
+	}
+	.alert.deleted-pet {
+		bottom: 100px;
+		width: 80%;
+	}
+}
+
+#pet_profile {
+	.content {
+		padding-bottom: 50px;
+	}
+	.section-title {
+		@include text-gradient;
+	}
+	.name {
+		@extend %pet_name;
+
+		.nickname {
+			@include lato-light;
+			font-size: 20px;
+		}
+	}
+	.items {
+		padding: 0 2rem;
+		gap: 30px;
+
+		.item {
+			gap: 8px;
+
+			h4 {
+				@include lato-light;
+				font-size: 20px;
+				margin: 0;
+			}
+			p {
+				font-size: 16px;
+				max-width: 80px;
+				text-align: center;
+				margin: 0;
+				line-height: 1;
+
+				.fa-xmark {
+					color: $red;
+				}
+				.fa-check {
+					color: $green;
+				}
+			}
+		}
+		.placeholder {
+			width: 100%;
+			height: 50px;
+			background: $dark-grey;
+			border-radius: 10px;
+		}
+	}
+}
+#pet_profile .items,
+#edit_pet .delete-pet {
+	.btn {
+		width: auto;
+		@include lato-regular;
+		font-size: 14px;
+	}
+}
+
+#edit_pet {
+	.delete-pet {
+		padding: 2rem 0;
+		margin-top: 8rem;
+		@include border("top", 1px, $red);
+		@include border("bottom", 1px, $red);
+	}
+	.cancel {
+		color: $red;
+	}
+}
+.modal[id*="delete"] {
+	.btn--danger {
+		@include lato-regular;
+		font-size: 18px;
+	}
+}

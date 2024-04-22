@@ -4,7 +4,7 @@
 			<div>View Pets</div>
 		</a>
 		
-		<?php if (is_allowed_fab()) : ?>
+		<?php if (get_server_uri() === "/view_pets") : ?>
 			<a href="/add_pet" class="bottom-bar__fab text-center">
 				<i class="fa-solid fa-plus fa-2x"></i>
 			</a>

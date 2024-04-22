@@ -69,6 +69,10 @@ class Rules {
 		return false;
 	}
 
+	public function is_number($value) {
+		return is_numeric($value);
+	}
+
 	public function email_exists($email) {
 		return $this->model->select_one("user_login", "email", ["email" => $email]);
 	}

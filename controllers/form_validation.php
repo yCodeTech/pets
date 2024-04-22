@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\User;
+use Models\Pet;
 
 class FormValidation {
 	private $type;
@@ -26,13 +27,38 @@ class FormValidation {
 				"password"=> "password"
 			],
 			"login" => [
-				"email" => "email"
+				"email" => "email",
+				"password" => "required"
+			],
+			"add_pet" => [
+				"name" => "name",
+				"nickname" => "name",
+				"species" => "name",
+				"breed" => "name",
+				"gender" => "set",
+				"weight" => "number",
+				"colour" => "name",
+				"habitat" => "name",
+				"birthday" => "required"
+			],
+			"book_vets" => [
+				"surgery" => "required",
+				"vet" => "set",
+				"pet" => "set",
+				"date" => "required",
+				"time" => "required"
 			]
 		];
 	}
 
 	public function validate() {
 		if (isset($_POST["submit"])) {
+			// If form type is edit_pet, then we need to set it's field rules
+			// to the same as the add_pet type.
+			if ($this->type === "edit_pet") {
+				$this->field_rules["edit_pet"] = $this->field_rules["add_pet"];
+			}
+			
 			// Test each field against the rules
 			foreach ($this->field_rules[$this->type] as $field_name => $rule_name) {
 				$this->test_field($field_name);
@@ -59,11 +85,35 @@ class FormValidation {
 				if ($this->type === "register") {
 					$user = (new User($firstname, $lastname, $email, $password))->register();
 				}
+				// Add a pet form
+				elseif ($this->type === "add_pet") {
+					$pet = (new Pet($_SESSION["user"], $this->fields))->add();
+
+					if ($pet) {
+						return true;
+					}
+				}
+				// Add a pet form
+				elseif ($this->type === "edit_pet") {
+					$update = (new Pet($_SESSION["user"], $this->fields))->edit();
+
+					if ($update) {
+						return true;
+					}
+				}
+				// Vet booking form
+				elseif ($this->type === "book_vets") {
+					return [
+						"confirm_booking" => true,
+						"postback_value" => $this->fields
+					];
+				}
 				// Only for login form
 				elseif ($this->type === "login") {
 					$user = true;
 				}
 
+				// Login and Register forms
 				if (!$user) {
 					return false;
 				}
@@ -84,7 +134,17 @@ class FormValidation {
 			return;
 		}
 
-		if ($this->rules->is_empty($this->fields[$field_name])) {
+		if ($this->field_rules[$this->type][$field_name] === "set") {
+			if (!isset($this->fields[$field_name])) {
+				$this->set_error($field_name, "This is required");
+			}
+		}
+
+		elseif ($this->rules->is_empty($this->fields[$field_name])) {
+			// Nickname isn't required but needs to validate as a name.
+			if ($field_name === "nickname") {
+				return;
+			}
 			$this->set_error($field_name, "This is required");
 		}
 		else {
@@ -120,6 +180,14 @@ class FormValidation {
 			if ($this->field_rules[$this->type][$field_name] === "password") {
 				if (!$this->rules->is_strong_password($this->fields[$field_name])) {
 					$this->set_error($field_name, "Please enter a stronger password");
+				}
+			}
+			/**
+			 * Number
+			 */
+			if ($this->field_rules[$this->type][$field_name] === "number") {
+				if (!$this->rules->is_number($this->fields[$field_name])) {
+					$this->set_error($field_name, "Please enter a number");
 				}
 			}
 		}

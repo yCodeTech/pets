@@ -1,17 +1,16 @@
-<nav class="navbar fixed-top navbar-light bg-light">
+<nav class="navbar fixed-top">
 	<div class="logo navbar-brand">
-		<img src="./images/default_logo_image.png" alt="logo">
-		<span>Pets</span>
+		<img src="./images/logo_horizontal.png" alt="logo">
 	</div>
 	
 	<?php if (get_server_uri() === "/settings") : ?>
 	<h2 class="section-title d-flex align-items-center">
-		<i class="fa-solid fa-gear pr-2"></i>
+		<i class="fa-solid fa-gear pr-2 settings"></i>
 		Settings
 	</h2>
 
 	<?php else : ?>
-		<a href="/settings">
+		<a href="/settings" class="settings">
 			<i class="fa-solid fa-gear fa-2x"></i>
 		</a>
 

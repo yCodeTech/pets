@@ -13,13 +13,12 @@
 			
 		</div>
 
-
-		<div class="delete-account my-5 p-4 d-flex justify-content-center">
-			<a href="/delete_account" class="btn btn--danger">Delete my account</a>
-			
-		</div>
+		<div class="d-flex justify-content-center delete-account">
+				<button type="button" class="btn btn--danger" data-toggle="modal" data-target="#delete_account_confirm">Delete Account</button>
+			</div>
 	</div>
 	
 
 
 </section>
+<?php include_view("components/modal", ["type" => "delete_account", "postback_value" => $data]); ?>
