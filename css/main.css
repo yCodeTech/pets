@@ -165,7 +165,7 @@ input {
 }
 .form-group:focus-within label:not(.form-check-label):not(.input-title):not(.no-label-top),
 .form-group .label-top:not(.input-title) {
-  top: -30px;
+  top: -30px !important;
 }
 
 form.row-flex-column {
