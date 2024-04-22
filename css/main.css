@@ -640,6 +640,9 @@ form.row-flex-column {
   opacity: 0.3;
 }
 
+#book_vets_confirm {
+  backdrop-filter: blur(2px);
+}
 #book_vets_confirm .icon {
   width: 40px;
   height: 40px;
@@ -684,6 +687,12 @@ form.row-flex-column {
 }
 #book_vets_confirm .appointment__item.vet-and-pets .item__photo {
   border-color: #5dbf6d;
+}
+#book_vets_confirm .dev-caveat {
+  font-size: 0.7rem;
+  padding: 0.3rem;
+  margin: auto;
+  width: fit-content;
 }
 
 /*# sourceMappingURL=main.css.map */

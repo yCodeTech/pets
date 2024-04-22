@@ -32,16 +32,20 @@ elseif ($type === "book_vets") {
 <div class="modal fade" id="<?php echo $type; ?>_confirm" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
-		<?php if ($type === "book_vets") : ?>
+			<?php if ($type === "book_vets") : ?>
 				<div class="icon mx-auto my-3">
-			<?php include_icon("book_vets"); ?>
+				<?php include_icon("book_vets"); ?>
 				</div>
-		<?php endif; ?>
+
+			<div class="alert alert-info dev-caveat"><b>Dev caveat: Confirming has no real functionality</b></div>
+			<?php endif; ?>
+
 		<div class="modal-header">
 			<h5 class="modal-title text-center"><?php echo $title; ?></h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 			</button>
+			
 		</div>
 
 		<?php if ($type === "book_vets") : ?>
@@ -96,7 +100,6 @@ elseif ($type === "book_vets") {
 			<button type="button" class="btn btn-outline--secondary" data-dismiss="modal">Cancel</button>
 
 			<form action="<?php echo $form_action; ?>" method="post" id="<?php echo $form_id; ?>" class="row-flex-column">
-
 				<?php if ($type === "book_vets") :
 					// Somehow store all booking values here in a hidden field ?>
 				<?php else : ?>
