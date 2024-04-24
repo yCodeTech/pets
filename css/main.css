@@ -291,8 +291,11 @@ form.row-flex-column {
   background: #f4f4f4;
 }
 .navbar .logo {
-  width: 50%;
+  max-height: calc(60px - 1rem);
   padding: 0;
+}
+.navbar .logo img {
+  max-height: calc(60px - 1rem);
 }
 .navbar .settings {
   color: #7d7d7d;
