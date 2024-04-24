@@ -67,7 +67,7 @@
 }
 %pet_name {
 	@include lato-black;
-	font-size: 32px;
+	font-size: 22px;
 }
 #view_pets {
 	.pets {
@@ -95,7 +95,7 @@
 			&__content {
 				background: $off-white-o50;
 				width: 222px;
-				height: 110px;
+				min-height: 110px;
 				padding-left: 3rem;
 				padding-right: 1.5rem;
 				gap: 15px;
@@ -184,7 +184,7 @@
 #edit_pet {
 	.delete-pet {
 		padding: 2rem 0;
-		margin-top: 8rem;
+		margin-top: 4rem;
 		@include border("top", 1px, $red);
 		@include border("bottom", 1px, $red);
 	}
@@ -193,5 +193,17 @@
 	.btn--danger {
 		@include lato-regular;
 		font-size: 18px;
+	}
+}
+
+#edit_pet,
+#add_pet {
+	.gender-container {
+		i {
+			margin-left: 0.5rem !important;
+		}
+	}
+	.form-group.cancel a {
+		font-size: 16px;
 	}
 }

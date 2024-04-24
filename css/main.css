@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 #book_vets label,
 #book_vets .input-title, #view_pets .pets .pet__content__name, #view_pets .pets .pet__content__breed, #view_pets .pets .pet__content__age, #pet_profile .name, #pet_profile .name .nickname, #pet_profile .items .item h4, #pet_profile .items .btn,
-#edit_pet .delete-pet .btn, .modal[id*=delete] .btn--danger, #settings .row-flex-column .delete-account .btn, .bottom-bar__btn div, #pet_form .toggle-container .input-title, *, .btn, .btn-outline--secondary, .section-title {
+#edit_pet .delete-pet .btn, .modal[id*=delete] .btn--danger, #settings .row-flex-column .logout a, #settings .row-flex-column .delete-account .btn, .bottom-bar__btn div, #pet_form .toggle-container .input-title, *, .btn, .btn--large, .btn-outline--secondary, .section-title {
   font-family: "Lato", sans-serif;
 }
 
@@ -38,7 +38,7 @@ img {
   display: flex;
   align-items: center;
   border-radius: 100px;
-  font-weight: 300;
+  font-weight: 400;
   font-style: normal;
   padding: 10px 45px;
   font-size: 24px;
@@ -49,10 +49,12 @@ img {
   width: 200px;
   padding: 18px 70px;
   font-size: 32px;
+  font-weight: 300;
+  font-style: normal;
 }
 .btn--primary {
   background: linear-gradient(to right, #a3d3f2, #d6beee);
-  color: #fff;
+  color: #101010;
 }
 .btn--secondary {
   background: none;
@@ -82,6 +84,7 @@ img {
   align-items: center;
   gap: 10px;
   margin-top: 10px;
+  font-size: 1rem;
 }
 
 .row-flex-column {
@@ -188,7 +191,8 @@ form.row-flex-column {
   padding: 10px 15px;
 }
 #pet_form .form-group:has(.toggle-container) {
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
   gap: 15px;
 }
 #pet_form .suffix {
@@ -376,7 +380,7 @@ form.row-flex-column {
 }
 
 #settings .row-flex-column {
-  gap: 5rem;
+  gap: 1rem;
 }
 #settings .row-flex-column .user {
   border-top: solid 1px #d9d9d9;
@@ -385,13 +389,15 @@ form.row-flex-column {
   display: flex;
   align-items: center;
 }
-#settings .row-flex-column .user .logout {
-  font-size: 14px;
-  color: red;
+#settings .row-flex-column .logout a {
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  color: #dc3545;
 }
 #settings .row-flex-column .delete-account {
   padding: 2rem 0;
-  margin-top: 3rem;
+  margin-top: 8rem;
   border-top: solid 1px #dc3545;
   border-bottom: solid 1px #dc3545;
 }
@@ -471,7 +477,7 @@ form.row-flex-column {
 #pet_profile .name, #view_pets .pets .pet__content__name {
   font-weight: 900;
   font-style: normal;
-  font-size: 32px;
+  font-size: 22px;
 }
 
 #view_pets .pets {
@@ -498,7 +504,7 @@ form.row-flex-column {
 #view_pets .pets .pet__content {
   background: rgba(244, 244, 244, 0.5019607843);
   width: 222px;
-  height: 110px;
+  min-height: 110px;
   padding-left: 3rem;
   padding-right: 1.5rem;
   gap: 15px;
@@ -574,7 +580,7 @@ form.row-flex-column {
 
 #edit_pet .delete-pet {
   padding: 2rem 0;
-  margin-top: 8rem;
+  margin-top: 4rem;
   border-top: solid 1px #dc3545;
   border-bottom: solid 1px #dc3545;
 }
@@ -583,6 +589,15 @@ form.row-flex-column {
   font-weight: 400;
   font-style: normal;
   font-size: 18px;
+}
+
+#edit_pet .gender-container i,
+#add_pet .gender-container i {
+  margin-left: 0.5rem !important;
+}
+#edit_pet .form-group.cancel a,
+#add_pet .form-group.cancel a {
+  font-size: 16px;
 }
 
 #book_vets {

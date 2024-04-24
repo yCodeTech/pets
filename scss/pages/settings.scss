@@ -4,22 +4,24 @@
 
 #settings {
 	.row-flex-column {
-		gap: 5rem;
+		gap: 1rem;
 
 		.user {
 			@include border("top", 1px, $grey);
 			@include border("bottom", 1px, $grey);
 			font-size: 20px;
 			@include align-items-center;
-
-			.logout {
-				font-size: 14px;
-				color: red;
+		}
+		.logout {
+			a {
+				font-size: 16px;
+				@include lato-regular;
+				color: $red;
 			}
 		}
 		.delete-account {
 			padding: 2rem 0;
-			margin-top: 3rem;
+			margin-top: 8rem;
 			@include border("top", 1px, $red);
 			@include border("bottom", 1px, $red);
 

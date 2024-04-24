@@ -241,7 +241,8 @@ function get_gender_icon($gender) {
 	else {
 		$faclass = "venus";
 	}
-	return "<i class='fa-solid fa-$faclass ml-2'></i>";
+
+	return "<i class='fa-solid fa-$faclass'></i>";
 }
 function get_boolean_icon($value) {
 	if ($value === "yes") {

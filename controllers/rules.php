@@ -22,11 +22,11 @@ class Rules {
 	 * @param string|null $regex_value Extra special characters for the regex to check against.
 	 * @return boolean
 	 */
-	public function is_name($value) {
+	public function is_name($value, $extra_regex) {
 
 		// Regex to match an upper and lowercase letters, spaces and other special characters that are passed to it.
 		// Provided by https://stackoverflow.com/a/58964725/2358222
-		$pattern = "/^(?!.*['-]{2})[a-zA-Z][a-zA-Z\s'-]{1,}$/";
+		$pattern = "/^(?!.*['-]{2})[a-zA-Z][a-zA-Z\s'$extra_regex-]{1,}$/";
 		if (preg_match($pattern, $value)) {
 			return true;
 		}

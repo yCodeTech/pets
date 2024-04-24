@@ -12,7 +12,6 @@ elseif (isset($postback_value["photo"]) && !empty($postback_value["photo"])) {
 	$photo = $uploads_dir . $postback_value["photo"];
 }
 
-
 ?>
 
 <section id="<?php echo $section_id; ?>" class="logged-in fixed-bars-offset pet">
@@ -81,14 +80,14 @@ elseif (isset($postback_value["photo"]) && !empty($postback_value["photo"])) {
 						<input class="form-check-input" type="radio" name="gender" id="gender-male" value="male" <?php echo is_checked("male", $gender_value); ?>>
 
 						<label class="form-check-label d-flex align-items-center px-1" for="gender-male">
-							Male <i class="fa-solid fa-mars ml-2"></i>
+							Male <?php echo get_gender_icon("male"); ?>
 						</label>
 					</div>
 					<div class="form-check form-check-inline mr-0">
 						<input class="form-check-input" type="radio" name="gender" id="gender-female" value="female" <?php echo is_checked("female", $gender_value); ?>>
 
 						<label class="form-check-label d-flex align-items-center px-1" for="gender-female">
-							Female <i class="fa-solid fa-venus ml-2"></i>
+							Female <?php echo get_gender_icon("female"); ?>
 						</label>
 					</div>
 				</div>

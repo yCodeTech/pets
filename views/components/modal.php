@@ -40,75 +40,74 @@ elseif ($type === "book_vets") {
 			<div class="alert alert-info dev-caveat"><b>Dev caveat: Confirming has no real functionality</b></div>
 			<?php endif; ?>
 
-		<div class="modal-header">
-			<h5 class="modal-title text-center"><?php echo $title; ?></h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-			</button>
-			
-		</div>
-
-		<?php if ($type === "book_vets") : ?>
-		<div class="appointment row-flex-column">
-			<div class="appointment__item">
-				<i class="fa-regular fa-calendar-days"></i>
-
+			<div class="modal-header">
+				<h5 class="modal-title"><?php echo $title; ?></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
 				
-				<p><?php echo format_date($data["postback_value"]["date"], "l jS F"); ?></p>
-			</div>
-			<div class="appointment__item">
-				<i class="fa-regular fa-clock"></i>
-				<p><?php echo format_time($postback_value["time"]); ?></p>
-			</div>
-			<div class="appointment__item">
-				<i class="fa-solid fa-location-dot"></i>
-				<p><?php echo $surgery_name . ", " . $surgery_location; ?></p>
 			</div>
 
-			<div class="appointment__item vet-and-pets row no-gutters flex-nowrap">
+			<?php if ($type === "book_vets") : ?>
+			<div class="appointment row-flex-column">
+				<div class="appointment__item">
+					<i class="fa-regular fa-calendar-days"></i>
 
-				<div class="vet-selection row no-gutters flex-nowrap">
-				<div class="item">
-						<div class="row-flex-column">
-							<div class="item__photo">
-								<i class="fa-solid fa-user fa-2x"></i>
+					
+					<p><?php echo format_date($data["postback_value"]["date"], "l jS F"); ?></p>
+				</div>
+				<div class="appointment__item">
+					<i class="fa-regular fa-clock"></i>
+					<p><?php echo format_time($postback_value["time"]); ?></p>
+				</div>
+				<div class="appointment__item">
+					<i class="fa-solid fa-location-dot"></i>
+					<p><?php echo $surgery_name . ", " . $surgery_location; ?></p>
+				</div>
+
+				<div class="appointment__item vet-and-pets row no-gutters flex-nowrap">
+
+					<div class="vet-selection row no-gutters flex-nowrap">
+					<div class="item">
+							<div class="row-flex-column">
+								<div class="item__photo">
+									<i class="fa-solid fa-user fa-2x"></i>
+								</div>
+								<div class="item__name"><?php echo $vet_name; ?></div>
 							</div>
-							<div class="item__name"><?php echo $vet_name; ?></div>
 						</div>
 					</div>
+
+
+					<div class="pet-selection row no-gutters flex-nowrap">
+				<?php foreach ($extra["pet_details"] as $key => $pet) : ?>
+						<div class="item">
+							<div class="row-flex-column">
+								<div class="item__photo"><?php include_icon("paw"); ?></div>
+								<div class="item__name"><?php echo $pet["name"]; ?></div>
+							</div>
+						</div>
+				<?php endforeach; ?>
 				</div>
 
 
-				<div class="pet-selection row no-gutters flex-nowrap">
-			<?php foreach ($extra["pet_details"] as $key => $pet) : ?>
-					<div class="item">
-						<div class="row-flex-column">
-							<div class="item__photo"><?php include_icon("paw"); ?></div>
-							<div class="item__name"><?php echo $pet["name"]; ?></div>
-						</div>
-					</div>
-			<?php endforeach; ?>
+				</div>
 			</div>
-
-
-			</div>
-		</div>
-		<?php endif; ?>
+			<?php endif; ?>
 
 		
-		<div class="modal-footer">
-			<button type="button" class="btn btn-outline--secondary" data-dismiss="modal">Cancel</button>
+			<div class="modal-footer">
+				<form action="<?php echo $form_action; ?>" method="post" id="<?php echo $form_id; ?>" class="row-flex-column w-100">
+					<?php if ($type === "book_vets") :
+						// Somehow store all booking values here in a hidden field ?>
+					<?php else : ?>
+						<input type="hidden" name="id" value="<?php echo $postback_value["id"]; ?>">
+					<?php endif; ?>
 
-			<form action="<?php echo $form_action; ?>" method="post" id="<?php echo $form_id; ?>" class="row-flex-column">
-				<?php if ($type === "book_vets") :
-					// Somehow store all booking values here in a hidden field ?>
-				<?php else : ?>
-					<input type="hidden" name="id" value="<?php echo $postback_value["id"]; ?>">
-				<?php endif; ?>
-
-				<input type="submit" name="<?php echo $type; ?>" id="<?php echo $type; ?>_btn" class="btn <?php echo $btn_class; ?>" value="<?php echo $btn_txt; ?>">
-			</form>
-		</div>
+					<input type="submit" name="<?php echo $type; ?>" id="<?php echo $type; ?>_btn" class="btn  <?php echo $btn_class; ?> w-100" value="<?php echo $btn_txt; ?>">
+				</form>
+				<button type="button" class="btn btn-outline--secondary w-100" data-dismiss="modal">Cancel</button>
+			</div>
 		</div>
 	</div>
 </div>

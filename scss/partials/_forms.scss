@@ -71,7 +71,8 @@ form.row-flex-column {
 			padding: 10px 15px;
 		}
 		&:has(.toggle-container) {
-			width: 320px;
+			width: 100%;
+			max-width: 320px;
 			gap: 15px;
 		}
 	}

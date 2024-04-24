@@ -27,7 +27,7 @@ img {
 	@include d-flex;
 	@include center;
 	@include round;
-	@include lato-light;
+	@include lato-regular;
 	padding: 10px 45px;
 	font-size: 24px;
 	width: 150px;
@@ -37,10 +37,11 @@ img {
 		width: 200px;
 		padding: 18px 70px;
 		font-size: 32px;
+		@include lato-light;
 	}
 	&--primary {
 		background: $gradient;
-		color: $white;
+		color: $black;
 	}
 	&--secondary {
 		background: none;
@@ -69,6 +70,7 @@ img {
 	@include align-items-center;
 	gap: 10px;
 	margin-top: 10px;
+	font-size: 1rem;
 }
 .row-flex-column {
 	@include d-flex;

@@ -4,18 +4,18 @@
 		<span>Back</span>
 	</a>
 
-	<div class="row-flex-column">
-
-
-		<div class="user my-5 p-4 d-flex justify-content-between">
+	<div class="row-flex-column mt-5">
+		<div class="user p-4 d-flex justify-content-between">
 			<span><?php echo "$firstname $lastname"; ?></span>
-			<a href="/logout" class="logout">Logout</a>
-			
+		</div>
+
+		<div class="logout d-flex justify-content-center mt-3">
+		<a href="/logout" class="btn btn-outline--secondary">Logout</a>
 		</div>
 
 		<div class="d-flex justify-content-center delete-account">
-				<button type="button" class="btn btn--danger" data-toggle="modal" data-target="#delete_account_confirm">Delete Account</button>
-			</div>
+			<button type="button" class="btn btn--danger" data-toggle="modal" data-target="#delete_account_confirm">Delete Account</button>
+		</div>
 	</div>
 	
 

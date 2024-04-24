@@ -184,8 +184,14 @@ class FormValidation {
 			 * Name
 			 */
 			if ($this->field_rules[$this->type][$field_name] === "name") {
-				if (!$this->rules->is_name($this->fields[$field_name])) {
-					$this->set_error($field_name, "Please enter only letters, spaces, apostrophes ('), hyphens (-) and more than 1 character");
+				$extra_regex = "";
+				$extra_error_msg = "";
+				if ($field_name === "colour") {
+					$extra_regex = ",";
+					$extra_error_msg = ", commas (,)";
+				}
+				if (!$this->rules->is_name($this->fields[$field_name], $extra_regex)) {
+					$this->set_error($field_name, "Please enter only letters, spaces, apostrophes ('), hyphens (-)$extra_error_msg and more than 1 character");
 				}
 			}
 
