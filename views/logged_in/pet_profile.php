@@ -2,7 +2,11 @@
 
 	<div class="pet__photo-container">
 		<div class="pet__photo mx-auto">
-			<?php include_icon("paw"); ?>
+			<?php if ($pet["photo"]) : ?>
+				<img src="<?php echo get_uploads_dir() . $pet["photo"]; ?>">
+			<?php else : ?>
+				<?php include_icon("paw"); ?>
+			<?php endif; ?>
 		</div>
 	</div>
 	<div class="content container">

@@ -72,4 +72,37 @@ $(function () {
 			$input.attr("checked", true);
 		}
 	});
+
+	/**
+	 * Pet Profile photo upload
+	 *
+	 * Code from https://codepen.io/shantikumarsingh/pen/RRmWxo
+	 */
+
+	const $pet_photo = $("#add_pet .pet__photo, #edit_pet .pet__photo");
+
+	if ($pet_photo.find("img").attr("src") != "") {
+		$pet_photo.find("img").removeClass("d-none");
+		$pet_photo.find("svg").addClass("d-none");
+	}
+
+	var readURL = function (input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function (e) {
+				$pet_photo.find("svg").addClass("d-none").end().find("img").attr("src", e.target.result).removeClass("d-none");
+			};
+
+			reader.readAsDataURL(input.files[0]);
+		}
+	};
+
+	$(".file-upload").on("change", function () {
+		readURL(this);
+	});
+
+	$(".add-photo").on("click", function () {
+		$(".file-upload").trigger("click");
+	});
 });

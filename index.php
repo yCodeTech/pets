@@ -46,6 +46,12 @@ if (is_protected_page() && !is_logged_in()) {
 	header("Location: /access_portal");
 }
 
+if (!str_contains($server_uri, "/add") && !str_contains($server_uri, "/edit") && isset($_SESSION["temp_photo"]) && is_logged_in()) {
+	// Delete all temp photos and unset the temp photo session.
+	$user->delete("temp_pet_photo");
+	unset($_SESSION["temp_photo"]);
+}
+
 if ($server_uri === "/access_portal") {
 	if (is_logged_in()) {
 		header("Location: /view_pets");

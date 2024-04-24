@@ -1,10 +1,36 @@
 <?php $section_id = str_contains(get_server_uri(), "/edit_pet") ? "edit_pet" : "add_pet"; ?>
 
+<?php
+
+
+$photo = "";
+$uploads_dir = get_uploads_dir();
+if (isset($_SESSION["temp_photo"])) {
+	$photo = $uploads_dir . "temp/" . $_SESSION["temp_photo"];
+}
+elseif (isset($postback_value["photo"]) && !empty($postback_value["photo"])) {
+	$photo = $uploads_dir . $postback_value["photo"];
+}
+
+
+?>
+
 <section id="<?php echo $section_id; ?>" class="logged-in fixed-bars-offset pet">
 
 	<div class="pet__photo-container">
+			<div class="add-photo">
+				<i class="fa-solid fa-pen"></i>
+			</div>
 		<div class="pet__photo mx-auto">
-			<?php include_icon("paw"); ?>
+
+		<?php  ?>
+
+			<?php if (!empty($photo)) : ?>
+				<img src="<?php echo $photo; ?>">
+			<?php else : ?>
+				<img src="" class="d-none">
+				<?php include_icon("paw"); ?>
+			<?php endif; ?>
 		</div>
 	</div>
 	<div class="content container">
@@ -14,7 +40,10 @@
 			</a>
 		</div>
 
-		<form action="<?php echo get_server_uri(); ?>" method="post" id="pet_form" class="row-flex-column mt-5">
+		<form action="<?php echo get_server_uri(); ?>" method="post" enctype="multipart/form-data" id="pet_form" class="row-flex-column mt-5">
+
+		<input type="file" name="photo" class="file-upload" accept="image/png, image/jpeg" hidden>
+		<input type="hidden" name="temp_photo" value="<?php echo $_SESSION["temp_photo"] ?? ""; ?>">
 
 			<div class="form-group">
 				<label for="name">Name</label>

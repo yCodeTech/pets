@@ -116,9 +116,6 @@ class BaseModel {
 		// Add to the last key
 		$fields .= " = ?";
 
-		
-
-
 		$where_keys = array_keys($where);
 		$last_key = end($where_keys);
 		$where_clause = "";
@@ -132,8 +129,6 @@ class BaseModel {
 		}
 		
 		$query = "UPDATE $table_name SET $fields WHERE $where_clause";
-
-		echo $query;
 
 		$prepare = $this->connection->prepare($query);
 		return $prepare->execute(array_values($values));

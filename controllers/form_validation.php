@@ -4,10 +4,13 @@ namespace Controllers;
 
 use Models\User;
 use Models\Pet;
+use Models\File;
 
 class FormValidation {
 	private $type;
 	private $fields;
+	private $file;
+	private $file_upload;
 	private $errors = [];
 
 	private $rules;
@@ -15,40 +18,49 @@ class FormValidation {
 	private $field_rules;
 	
 	public function __construct($type) {
-		$this->type = $type;
-		$this->fields = $_POST ?? "";
-		$this->rules = new Rules();
-		$this->field_rules = [
-			"register" => [
+		if (isset($_POST["submit"])) {
+			$this->type = $type;
+			$this->fields = $_POST ?? "";
+
+			if ($this->type == "add_pet" || $this->type == "edit_pet") {
+				$this->file = $_FILES["photo"] ?? "";
+
+				$this->file_upload = new File($this->file);
+			}
+			
+			$this->rules = new Rules();
+			$this->field_rules = [
+				"register" => [
 				// fieldname => rulename
-				"firstname" => "name",
-				"lastname" => "name",
-				"email" => "email",
-				"password"=> "password"
-			],
-			"login" => [
-				"email" => "email",
-				"password" => "required"
-			],
-			"add_pet" => [
-				"name" => "name",
-				"nickname" => "name",
-				"species" => "name",
-				"breed" => "name",
-				"gender" => "set",
-				"weight" => "number",
-				"colour" => "name",
-				"habitat" => "name",
-				"birthday" => "required"
-			],
-			"book_vets" => [
-				"surgery" => "required",
-				"vet" => "set",
-				"pet" => "set",
-				"date" => "required",
-				"time" => "required"
-			]
-		];
+					"firstname" => "name",
+					"lastname" => "name",
+					"email" => "email",
+					"password"=> "password"
+				],
+				"login" => [
+					"email" => "email",
+					"password" => "required"
+				],
+				"add_pet" => [
+					"name" => "name",
+					"nickname" => "name",
+					"species" => "name",
+					"breed" => "name",
+					"gender" => "set",
+					"weight" => "number",
+					"colour" => "name",
+					"habitat" => "name",
+					"birthday" => "required"
+				],
+				"book_vets" => [
+					"surgery" => "required",
+					"vet" => "set",
+					"pet" => "set",
+					"date" => "required",
+					"time" => "required"
+				]
+			];
+		}
 	}
 
 	public function validate() {
@@ -58,6 +70,8 @@ class FormValidation {
 			if ($this->type === "edit_pet") {
 				$this->field_rules["edit_pet"] = $this->field_rules["add_pet"];
 			}
+
+			// var_dump($this->file);
 			
 			// Test each field against the rules
 			foreach ($this->field_rules[$this->type] as $field_name => $rule_name) {
@@ -73,9 +87,15 @@ class FormValidation {
 			}
 
 			if ($this->has_errors()) {
+				if (!isset($this->errors["photo"]) && isset($this->file_upload)) {
+					// Temporarily store the photo upload.
+					$_SESSION["temp_photo"] = $this->file_upload->temp_store();
+				}
+
 				return [
 					"errors" => $this->errors,
 					"postback_value" => $this->fields
+					
 				];
 			}
 			else {
@@ -87,7 +107,13 @@ class FormValidation {
 				}
 				// Add a pet form
 				elseif ($this->type === "add_pet") {
-					$pet = (new Pet($_SESSION["user"], $this->fields))->add();
+					$file_name = "";
+					if (empty($this->file["name"]) && !empty($this->fields["temp_photo"])) {
+						$file_name = $this->fields["temp_photo"];
+					}
+					
+					$photo = $this->file_upload->upload($file_name);
+					$pet = (new Pet($_SESSION["user"], $this->fields, $photo))->add();
 
 					if ($pet) {
 						return true;
@@ -95,7 +121,13 @@ class FormValidation {
 				}
 				// Add a pet form
 				elseif ($this->type === "edit_pet") {
-					$update = (new Pet($_SESSION["user"], $this->fields))->edit();
+					$file_name = "";
+					if (empty($this->file["name"]) && !empty($this->fields["temp_photo"])) {
+						$file_name = $this->fields["temp_photo"];
+					}
+
+					$photo = $this->file_upload->upload($file_name);
+					$update = (new Pet($_SESSION["user"], $this->fields, $photo))->edit();
 
 					if ($update) {
 						return true;

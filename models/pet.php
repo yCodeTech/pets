@@ -22,8 +22,9 @@ class Pet extends BaseModel {
 	private $dry_food;
 	private $treats;
 	private $special_requirements;
+	private $photo;
 
-	function __construct($user, $data) {
+	function __construct($user, $data, $photo) {
 		extract($data);
 		if (isset($id)) {
 			$this->id = $id;
@@ -46,6 +47,7 @@ class Pet extends BaseModel {
 		$this->dry_food = $dry_food ?: "None";
 		$this->treats = $treats ?: "None";
 		$this->special_requirements = $special_requirements ?: "None";
+		$this->photo = $photo ?? "" ?: "";
 		
 		parent::__construct();
 	}
@@ -72,12 +74,17 @@ class Pet extends BaseModel {
 			"wet_food" => $this->wet_food,
 			"dry_food" => $this->dry_food,
 			"treats" => $this->treats,
-			"special_requirements" => $this->special_requirements
+			"special_requirements" => $this->special_requirements,
+			"photo" => $this->photo
 		]);
 	}
 	
 	public function edit() {
 		$data = parent::select_one("user_login", "user_id", ["email" => $this->user]);
+
+		// Delete the old photo.
+		$old_photo = parent::select_one("pet", "photo", ["id" => $this->id, "user_id" => $data["user_id"]]);
+		File::delete(get_proj_root_dir() . get_uploads_dir() . $old_photo["photo"]);
 
 		return parent::update("pet", [
 			"name" => $this->name,
@@ -96,7 +103,8 @@ class Pet extends BaseModel {
 			"wet_food" => $this->wet_food,
 			"dry_food" => $this->dry_food,
 			"treats" => $this->treats,
-			"special_requirements" => $this->special_requirements
+			"special_requirements" => $this->special_requirements,
+			"photo" => $this->photo
 		], ["id" => $this->id, "user_id" => $data["user_id"]]);
 	}
 }

@@ -39,9 +39,13 @@ class User extends BaseController {
 
 		return $data;
 	}
-	public function delete() {
+	public function delete($type = null) {
 		if (isset($_POST["delete_pet"])) {
-			$deleted = $this->model->delete("pet", $_POST["id"]);
+			$pet_id = $_POST["id"];
+
+			$this->delete_pet_photo("one", ["id" => $pet_id]);
+
+			$deleted = $this->model->delete("pet", $pet_id);
 
 			if ($deleted) {
 				$_SESSION["deleted_pet"] = "The pet was deleted.";
@@ -49,13 +53,45 @@ class User extends BaseController {
 			}
 		}
 		elseif (isset($_POST["delete_account"])) {
-			$deleted = $this->model->delete("user", $_POST["id"]);
+			$user_id = $_POST["id"];
+
+			$this->delete_pet_photo("all", ["user_id" => $user_id]);
+
+			$deleted = $this->model->delete("user", $user_id);
 
 			if ($deleted) {
 				$_SESSION["deleted_account"] = "Your account was deleted.";
 				return true;
 			}
 		}
+
+		// If temp photos
+		if ($type === "temp_pet_photo") {
+			// Delete all temp photos in the images/uploads/temp directory
+			$dir = get_proj_root_dir() . get_uploads_dir() ."temp/";
+			array_map('unlink', glob("$dir*"));
+		}
+	}
+
+	private function delete_pet_photo($select_type, $where) {
+		$uploads_dir = get_proj_root_dir() . get_uploads_dir();
+		// For the delete a pet.
+		if ($select_type === "one") {
+			$photo = $this->model->select_one("pet", "photo", $where);
+
+			// Delete the photo
+			\Models\File::delete($uploads_dir . $photo["photo"]);
+		}
+		// For the delete an account.
+		elseif ($select_type === "all") {
+			$photos = $this->model->select_all("pet", $where);
+
+			foreach ($photos as $photo) {
+				// Delete the photo
+				\Models\File::delete($uploads_dir . $photo["photo"]);
+			}
+		}
+		
 	}
 
 	private function calc_pet_age($birthday) {

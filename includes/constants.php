@@ -4,6 +4,7 @@ define("ROOT_DIR", dirname(__DIR__, 1));
 
 define("VIEWS_DIR", ROOT_DIR . "/views/");
 define("ICONS_DIR", ROOT_DIR . "/images/icons/");
+define("UPLOADS_DIR", "/images/uploads/");
 
 define("SITE_NAME", "My Pets");
 

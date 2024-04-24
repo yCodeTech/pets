@@ -108,6 +108,17 @@ function include_icon($icon_name) {
 	include ICONS_DIR.$icon_name . ".php";
 }
 
+function get_proj_root_dir($dir = "") {
+	if (!empty($dir)) {
+		$dir = "/$dir";
+	}
+	return ROOT_DIR . $dir;
+}
+
+function get_uploads_dir() {
+	return UPLOADS_DIR;
+}
+
 /**
  * Check to see if a user is logged in
  */

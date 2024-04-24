@@ -4,7 +4,13 @@
 		<?php foreach ($pets as $pet) : ?>
 			<a href="/pet_profile?id=<?php echo $pet["id"]; ?>" class="pet">
 				<div class="row align-items-center mx-auto position-relative">
-					<div class="pet__photo"><?php include_icon("paw"); ?></div>
+					<div class="pet__photo">
+			<?php if ($pet["photo"]) : ?>
+							<img src="<?php echo get_uploads_dir() . $pet["photo"]; ?>">
+			<?php else : ?>
+				<?php include_icon("paw"); ?>
+			<?php endif; ?>
+					</div>
 					<div class="pet__content col row-flex-column py-3">
 						<div class="row no-gutters align-items-center justify-content-between">
 							<h1 class="pet__content__name"><?php echo $pet["name"]; ?></h1>
