@@ -8,8 +8,26 @@
 	&__photo-container {
 		height: 200px;
 		position: relative;
-		@include center;
+		// @include center;
+		@include justify-content-center;
 		z-index: 1;
+
+		.add-photo {
+			width: 30px;
+			height: 30px;
+			@include round;
+			z-index: 1;
+			background: $off-white;
+			font-size: 15px;
+			@include center;
+			position: relative;
+			left: 70px;
+			top: 50px;
+
+			.file-upload {
+				display: none;
+			}
+		}
 	}
 	&__photo {
 		background: $grey;
@@ -19,6 +37,7 @@
 		height: 200px;
 		position: absolute;
 		top: 20%;
+		overflow: hidden;
 
 		svg {
 			width: 100px;
@@ -36,6 +55,10 @@
 		border-top-right-radius: 30px;
 		padding: 20px;
 
+		.cancel {
+			color: $red;
+		}
+
 		.form-group {
 			margin-left: auto;
 			margin-right: auto;
@@ -49,7 +72,7 @@
 #view_pets {
 	.pets {
 		gap: 20px;
-		align-items: end;
+		align-items: center;
 
 		.pet {
 			background: none;
@@ -60,8 +83,9 @@
 				width: 120px;
 				height: 120px;
 				top: unset;
-				left: 30px;
+				left: 10px;
 				z-index: 1;
+				position: relative;
 
 				svg {
 					width: 60px;
@@ -75,6 +99,8 @@
 				padding-left: 3rem;
 				padding-right: 1.5rem;
 				gap: 15px;
+				width: calc(100vw - 120px);
+				margin-left: -30px;
 
 				&__name {
 					@extend %pet_name;
@@ -161,9 +187,6 @@
 		margin-top: 8rem;
 		@include border("top", 1px, $red);
 		@include border("bottom", 1px, $red);
-	}
-	.cancel {
-		color: $red;
 	}
 }
 .modal[id*="delete"] {

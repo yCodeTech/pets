@@ -407,11 +407,27 @@ form.row-flex-column {
   height: 200px;
   position: relative;
   display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+.pet__photo-container .add-photo {
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  z-index: 1;
+  background: #f4f4f4;
+  font-size: 15px;
+  display: flex;
   display: flex;
   justify-content: center;
   display: flex;
   align-items: center;
-  z-index: 1;
+  position: relative;
+  left: 70px;
+  top: 50px;
+}
+.pet__photo-container .add-photo .file-upload {
+  display: none;
 }
 .pet__photo {
   background: #d9d9d9;
@@ -425,6 +441,7 @@ form.row-flex-column {
   height: 200px;
   position: absolute;
   top: 20%;
+  overflow: hidden;
 }
 .pet__photo svg {
   width: 100px;
@@ -440,6 +457,9 @@ form.row-flex-column {
   border-top-right-radius: 30px;
   padding: 20px;
 }
+.pet .content .cancel {
+  color: #dc3545;
+}
 .pet .content .form-group {
   margin-left: auto;
   margin-right: auto;
@@ -453,7 +473,7 @@ form.row-flex-column {
 
 #view_pets .pets {
   gap: 20px;
-  align-items: end;
+  align-items: center;
 }
 #view_pets .pets .pet {
   background: none;
@@ -464,8 +484,9 @@ form.row-flex-column {
   width: 120px;
   height: 120px;
   top: unset;
-  left: 30px;
+  left: 10px;
   z-index: 1;
+  position: relative;
 }
 #view_pets .pets .pet__photo svg {
   width: 60px;
@@ -478,6 +499,8 @@ form.row-flex-column {
   padding-left: 3rem;
   padding-right: 1.5rem;
   gap: 15px;
+  width: calc(100vw - 120px);
+  margin-left: -30px;
 }
 #view_pets .pets .pet__content__gender {
   font-size: 1rem;
@@ -551,9 +574,6 @@ form.row-flex-column {
   margin-top: 8rem;
   border-top: solid 1px #dc3545;
   border-bottom: solid 1px #dc3545;
-}
-#edit_pet .cancel {
-  color: #dc3545;
 }
 
 .modal[id*=delete] .btn--danger {
