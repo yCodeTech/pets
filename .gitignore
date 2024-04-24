@@ -2,3 +2,4 @@
 node_modules
 vendor
 .env
+sql_dump_with_data.sql
