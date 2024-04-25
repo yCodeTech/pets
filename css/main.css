@@ -480,6 +480,16 @@ form.row-flex-column {
   font-size: 22px;
 }
 
+#view_pets .alert.no_pets {
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+#view_pets .alert.no_pets i {
+  color: #5dbf6d;
+  font-size: 1.5rem;
+}
 #view_pets .pets {
   gap: 20px;
   align-items: center;

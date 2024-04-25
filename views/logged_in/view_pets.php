@@ -1,6 +1,11 @@
 <section id="view_pets" class="logged-in fixed-bars-offset">
 
 	<div class="pets row-flex-column py-5">
+		<?php if (count($pets) < 1) : ?>
+		<div class="alert alert-info no_pets">Click the <i class="fa-solid fa-circle-plus"></i> to add a pet</div>
+
+		<?php endif; ?>
+
 		<?php foreach ($pets as $pet) : ?>
 			<a href="/pet_profile?id=<?php echo $pet["id"]; ?>" class="pet">
 				<div class="row align-items-center mx-auto position-relative">
