@@ -25,7 +25,9 @@ class FormValidation {
 			if ($this->type == "add_pet" || $this->type == "edit_pet") {
 				$this->file = $_FILES["photo"] ?? "";
 
-				$this->file_upload = new File($this->file);
+				if (!empty($this->file["name"]) || !empty($this->fields["temp_photo"])) {
+					$this->file_upload = new File($this->file);
+				}
 			}
 			
 			$this->rules = new Rules();
@@ -107,12 +109,15 @@ class FormValidation {
 				}
 				// Add a pet form
 				elseif ($this->type === "add_pet") {
-					$file_name = "";
-					if (empty($this->file["name"]) && !empty($this->fields["temp_photo"])) {
-						$file_name = $this->fields["temp_photo"];
-					}
+					// Photo upload
+					if (!empty($this->file["name"]) || !empty($this->fields["temp_photo"])) {
+						$file_name = "";
+						if (empty($this->file["name"]) && !empty($this->fields["temp_photo"])) {
+							$file_name = $this->fields["temp_photo"];
+						}
 					
-					$photo = $this->file_upload->upload($file_name);
+						$photo = $this->file_upload->upload($file_name);
+					}
 					$pet = (new Pet($_SESSION["user"], $this->fields, $photo))->add();
 
 					if ($pet) {
@@ -121,12 +126,15 @@ class FormValidation {
 				}
 				// Add a pet form
 				elseif ($this->type === "edit_pet") {
-					$file_name = "";
-					if (empty($this->file["name"]) && !empty($this->fields["temp_photo"])) {
-						$file_name = $this->fields["temp_photo"];
-					}
+					// Photo upload
+					if (!empty($this->file["name"]) || !empty($this->fields["temp_photo"])) {
+						$file_name = "";
+						if (empty($this->file["name"]) && !empty($this->fields["temp_photo"])) {
+							$file_name = $this->fields["temp_photo"];
+						}
 
-					$photo = $this->file_upload->upload($file_name);
+						$photo = $this->file_upload->upload($file_name);
+					}
 					$update = (new Pet($_SESSION["user"], $this->fields, $photo))->edit();
 
 					if ($update) {
