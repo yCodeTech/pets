@@ -129,6 +129,19 @@ function is_logged_in() {
 	return false;
 }
 
+/**
+ * Check to see if a logged in user is the public test account.
+ * 
+ * Added after graduated uni to disable the account and pet delete btns
+ * if the logged in user is the public test account.
+ */
+function is_public_test_account() {
+	if ($_SESSION["user"] === "test@dev.com") {
+		return true;
+	}
+	return false;
+}
+
 function get_server_uri() {
 	return $_SERVER['REQUEST_URI'];
 }

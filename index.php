@@ -28,6 +28,14 @@ $controller = new BaseController();
 
 if (is_logged_in()) {
 	$user = new User($_SESSION["user"]);
+	
+	// Added after graduated uni to disable the account and pet delete btns
+	// if the logged in user is the public test account.
+	$_SESSION["disable_delete"] = false;
+	
+	if(is_public_test_account()) {
+		$_SESSION["disable_delete"] = true;
+	}
 }
 
 $controller->load_view("header");

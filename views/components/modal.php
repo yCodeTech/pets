@@ -6,14 +6,18 @@ $btn_txt = "";
 
 if ($type === "delete_pet") {
 	$title .= '<span class="text-danger">delete ' . $postback_value["name"] . '?</span>';
-	$form_action = "/delete";
+	// Changed after graduated uni to disable the delete btn
+	// if the logged in user is the public test account.
+	$form_action = !$_SESSION["disable_delete"] ? "/delete" : "";
 	$btn_txt = "Delete";
 	$form_id = "pet_form";
 }
 elseif ($type === "delete_account") {
 	$title .= '<span class="text-danger">delete your account?</span>';
 	$btn_txt = "Delete Account";
-	$form_action = "/delete";
+	// Changed after graduated uni to disable the delete btn
+	// if the logged in user is the public test account.
+	$form_action = !$_SESSION["disable_delete"] ? "/delete": "";
 	$form_id = "pet_form";
 }
 elseif ($type === "book_vets") {
@@ -33,19 +37,20 @@ elseif ($type === "book_vets") {
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<?php if ($type === "book_vets") : ?>
-				<div class="icon mx-auto my-3">
+			<div class="icon mx-auto my-3">
 				<?php include_icon("book_vets"); ?>
-				</div>
+			</div>
 
-			<div class="alert alert-info dev-caveat"><b>Dev caveat: Confirming has no real functionality</b></div>
+			<div class="alert alert-info dev-caveat"><b>Dev caveat: Confirming has no real
+					functionality</b></div>
 			<?php endif; ?>
 
 			<div class="modal-header">
 				<h5 class="modal-title"><?php echo $title; ?></h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
+					<span aria-hidden="true">&times;</span>
 				</button>
-				
+
 			</div>
 
 			<?php if ($type === "book_vets") : ?>
@@ -53,7 +58,7 @@ elseif ($type === "book_vets") {
 				<div class="appointment__item">
 					<i class="fa-regular fa-calendar-days"></i>
 
-					
+
 					<p><?php echo format_date($data["postback_value"]["date"], "l jS F"); ?></p>
 				</div>
 				<div class="appointment__item">
@@ -68,7 +73,7 @@ elseif ($type === "book_vets") {
 				<div class="appointment__item vet-and-pets row no-gutters flex-nowrap">
 
 					<div class="vet-selection row no-gutters flex-nowrap">
-					<div class="item">
+						<div class="item">
 							<div class="row-flex-column">
 								<div class="item__photo">
 									<i class="fa-solid fa-user fa-2x"></i>
@@ -80,33 +85,37 @@ elseif ($type === "book_vets") {
 
 
 					<div class="pet-selection row no-gutters flex-nowrap">
-				<?php foreach ($extra["pet_details"] as $key => $pet) : ?>
+						<?php foreach ($extra["pet_details"] as $key => $pet) : ?>
 						<div class="item">
 							<div class="row-flex-column">
 								<div class="item__photo"><?php include_icon("paw"); ?></div>
 								<div class="item__name"><?php echo $pet["name"]; ?></div>
 							</div>
 						</div>
-				<?php endforeach; ?>
-				</div>
+						<?php endforeach; ?>
+					</div>
 
 
 				</div>
 			</div>
 			<?php endif; ?>
 
-		
+
 			<div class="modal-footer">
-				<form action="<?php echo $form_action; ?>" method="post" id="<?php echo $form_id; ?>" class="row-flex-column w-100">
+				<form action="<?php echo $form_action; ?>" method="post"
+					id="<?php echo $form_id; ?>" class="row-flex-column w-100">
 					<?php if ($type === "book_vets") :
 						// Somehow store all booking values here in a hidden field ?>
 					<?php else : ?>
-						<input type="hidden" name="id" value="<?php echo $postback_value["id"]; ?>">
+					<input type="hidden" name="id" value="<?php echo $postback_value["id"]; ?>">
 					<?php endif; ?>
 
-					<input type="submit" name="<?php echo $type; ?>" id="<?php echo $type; ?>_btn" class="btn  <?php echo $btn_class; ?> w-100" value="<?php echo $btn_txt; ?>">
+					<input type="submit" name="<?php echo $type; ?>" id="<?php echo $type; ?>_btn"
+						class="btn  <?php echo $btn_class; ?> w-100"
+						value="<?php echo $btn_txt; ?>">
 				</form>
-				<button type="button" class="btn btn-outline--secondary w-100" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-outline--secondary w-100"
+					data-dismiss="modal">Cancel</button>
 			</div>
 		</div>
 	</div>
