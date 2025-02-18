@@ -1,5 +1,5 @@
 <section id="access_portal" class="access-portal">
-	<div class="row no-gutters justify-content-center">
+	<div class="row no-gutters justify-content-center align-content-center flex-column">
 		<?php include_view("components/large_logo"); ?>
 
 		<div class="btns row-flex-column">

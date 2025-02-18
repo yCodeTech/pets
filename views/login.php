@@ -1,5 +1,5 @@
 <section id="login" class="access-portal">
-	<div class="row no-gutters justify-content-center">
+	<div class="row no-gutters justify-content-center align-content-center flex-column">
 		<?php include_view("components/large_logo"); ?>
 
 		<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" id="login_form" class="row-flex-column">

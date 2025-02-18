@@ -1,4 +1,4 @@
-<div class="logo-container">
+<div class="logo-container mx-auto">
 	<div class="logo">
 		<img src="./images/logo.png" alt="logo">
 	</div>

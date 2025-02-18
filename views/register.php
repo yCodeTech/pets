@@ -1,5 +1,5 @@
 <section id="register" class="access-portal">
-	<div class="row no-gutters justify-content-center">
+	<div class="row no-gutters justify-content-center align-content-center flex-column">
 		<?php include_view("components/large_logo"); ?>
 
 		<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" id="register_form" class="row-flex-column">
@@ -39,7 +39,7 @@
 				<?php echo $errors["password"] ?? ""; ?>
 			</div>
 			<div class="form-group d-flex justify-content-center">
-				<input type="submit" name="submit" id="register" class="btn btn--primary" value="Register">
+				<input type="submit" name="submit" id="register" class="btn btn--primary w-auto" value="Register">
 			</div>
 		</form>
 
